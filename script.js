@@ -108,21 +108,20 @@ const DATA = {
         脉象: "脉浮紧"
       },
       masteredInfo: ["起病诱因", "怕冷", "鼻涕", "咳嗽", "舌象", "脉象"],
-      pendingInfo: ["汗出", "咽痛", "口渴", "痰色", "头痛身痛", "胃肠症状", "发热程度"],
+      pendingInfo: ["汗出", "咽痛", "痰色", "胃肠症状", "口渴"],
       questions: [
-        { key: "怕冷", question: "怕冷明显还是发热明显？" },
         { key: "汗", question: "有没有出汗？" },
         { key: "鼻涕", question: "鼻涕是清稀还是黄稠？" },
-        { key: "咽喉", question: "咽喉是疼痛红肿，还是发痒不适？" },
+        { key: "咽痛", question: "咽喉是否红肿疼痛？" },
         { key: "痰", question: "痰是白稀还是黄稠？" },
-        { key: "头痛身痛", question: "头痛身痛明显吗？" },
-        { key: "口渴", question: "口渴想喝冷水吗？" },
+        { key: "怕冷", question: "怕冷明显还是发热明显？" },
+        { key: "口渴", question: "是否口渴想喝冷水？" },
         { key: "胃肠", question: "是否有腹胀、恶心、腹泻？" }
       ],
       knowledgeBase: [
         { key: "怕冷", aliases: ["怕冷", "恶寒", "发热明显", "怕冷明显"], answer: "怕冷比较明显，比发热更明显，盖上被子会舒服些。", relevance: "high" },
         { key: "发热", aliases: ["发热", "体温", "高热", "低热"], answer: "体温 37.5℃，有点低热，但没有明显高热。", relevance: "medium" },
-        { key: "汗", aliases: ["汗", "出汗", "汗出", "无汗"], answer: "没有明显出汗。", relevance: "high" },
+        { key: "汗", aliases: ["汗", "出汗", "汗出", "无汗", "发汗", "有汗"], answer: "没有明显出汗。", relevance: "high" },
         { key: "鼻涕", aliases: ["鼻涕", "流涕", "黄稠", "清稀"], answer: "鼻涕是清稀的，不黄不稠。", relevance: "high" },
         { key: "清涕", aliases: ["清涕", "清鼻涕"], answer: "鼻涕清稀，像水一样。", relevance: "high" },
         { key: "咽喉", aliases: ["咽喉", "嗓子", "发痒", "红肿"], answer: "嗓子有点不舒服，更像发痒，不是明显红肿疼痛。", relevance: "medium" },
@@ -209,22 +208,31 @@ const DATA = {
   coldDiagnosis: {
     证型判断: { options: ["风寒感冒", "风热感冒", "暑湿感冒", "气虚感冒", "阴虚感冒"], selected: ["风寒感冒"] },
     治法选择: { options: ["辛温解表，宣肺散寒", "辛凉解表，疏风清热", "清暑祛湿，解表和中", "益气解表", "滋阴解表"], selected: ["辛温解表，宣肺散寒"] },
-    方剂选择: { options: ["荆防败毒散加减", "银翘散加减", "新加香薷饮加减", "参苏饮加减", "加减葳蕤汤"], selected: ["荆防败毒散加减"] },
+    方剂选择: { options: ["荆防败毒散加减", "麻黄汤加减", "桂枝汤加减", "银翘散加减", "桑菊饮加减", "新加香薷饮加减", "白虎加人参汤"], selected: ["荆防败毒散加减"] },
     中药配方选择: {
       multi: true,
       options: ["荆芥", "金银花", "防风", "连翘", "羌活", "薄荷", "独活", "牛蒡子", "柴胡", "黄芩", "前胡", "石膏", "桔梗", "香薷", "枳壳", "藿香", "茯苓", "佩兰", "川芎", "麦冬", "甘草", "沙参", "生姜"],
-      selected: ["荆芥", "防风", "羌活", "独活", "柴胡", "前胡", "桔梗", "枳壳", "茯苓", "川芎", "甘草", "生姜"]
+      selected: []
     },
     中成药选择: {
       multi: true,
       options: ["风寒感冒颗粒", "荆防颗粒", "感冒清热颗粒", "银翘解毒丸", "桑菊感冒片", "藿香正气水", "双黄连口服液", "连花清瘟胶囊"],
-      selected: ["风寒感冒颗粒", "荆防颗粒", "感冒清热颗粒"]
+      selected: []
     }
   },
   coldAnswer: {
     syndrome: "风寒感冒",
     method: "辛温解表，宣肺散寒",
     formula: "荆防败毒散加减",
+    formulaGraph: {
+      "荆防败毒散加减": { syndrome: "风寒", relation: "本案首选", score: 92, note: "图谱中由风寒节点强连接到荆防败毒散。本案恶寒重、无汗、清涕、身痛、苔薄白、脉浮紧，方向最匹配。" },
+      "麻黄汤加减": { syndrome: "风寒", relation: "相关但需辨别", score: 78, note: "麻黄汤也属于风寒表实方向，和无汗、恶寒、身痛有关；但本案是普通感冒训练，鼻塞喷嚏、咳嗽清涕更适合先用荆防败毒散方向。" },
+      "桂枝汤加减": { syndrome: "风寒", relation: "相关但证据不足", score: 66, note: "桂枝汤偏风寒表虚、有汗、营卫不和。本案明确无汗，因此与图谱风寒节点有关，但不是本案主线。" },
+      "银翘散加减": { syndrome: "风热", relation: "证型偏离", score: 58, note: "银翘散经风热节点连接，需发热重、咽痛、口渴、黄涕黄痰等证据。本案这些证据不足。" },
+      "桑菊饮加减": { syndrome: "风热", relation: "证型偏离", score: 56, note: "桑菊饮偏风热咳嗽方向。本案痰白清稀、恶寒明显，更支持风寒。" },
+      "新加香薷饮加减": { syndrome: "暑湿", relation: "证型偏离", score: 60, note: "新加香薷饮经暑湿节点连接，需暑湿环境、身热不扬、胃肠湿阻等证据。本案胃肠症状不突出。" },
+      "白虎加人参汤": { syndrome: "热盛/气津两伤", relation: "不匹配", score: 45, note: "白虎加人参汤偏气分热盛、气津两伤方向，需高热、汗出、口渴、脉洪大等证据。本案不符合。" }
+    },
     herbs: ["荆芥", "防风", "羌活", "独活", "柴胡", "前胡", "桔梗", "枳壳", "茯苓", "川芎", "甘草", "生姜"],
     herbFunctions: {
       荆芥: "疏风解表",
@@ -279,14 +287,17 @@ const DATA = {
     coldHerbs: ["金银花", "连翘", "石膏", "黄芩"],
     patent: ["风寒感冒颗粒", "荆防颗粒", "感冒清热颗粒"],
     inquiryTips: {
-      汗: "已获得关键证据：无汗 → 支持风寒束表判断。",
-      鼻涕: "已获得关键证据：清涕 → 更偏寒象，可用于鉴别风热感冒。",
-      清涕: "已获得关键证据：清涕 → 更偏寒象，可用于鉴别风热感冒。",
-      咽喉: "已排除部分风热证据：明显咽痛、红肿不突出。",
-      咽痛: "已排除部分风热证据：明显咽痛、红肿不突出。",
-      胃肠: "已排除部分暑湿证据：胃肠症状不明显。",
-      怕冷: "已获得关键证据：恶寒较重 → 更支持风寒外束。",
-      痰: "已获得关键证据：痰白清稀 → 寒象较明显。"
+      汗: "无汗 → 支持风寒束表判断。",
+      鼻涕: "清涕 → 更偏寒象，可用于鉴别风热感冒。",
+      清涕: "清涕 → 更偏寒象，可用于鉴别风热感冒。",
+      咽喉: "明显咽痛、红肿不突出 → 暂不支持典型风热咽痛。",
+      咽痛: "明显咽痛、红肿不突出 → 暂不支持典型风热咽痛。",
+      胃肠: "胃肠症状不明显 → 暑湿感冒证据不足。",
+      怕冷: "恶寒较重 → 更支持风寒外束。",
+      痰: "痰白清稀 → 更偏寒象，不支持痰热主线。",
+      口渴: "不明显口渴 → 热象证据不足。",
+      舌象: "苔薄白 → 更支持表寒或寒热不重。",
+      脉象: "脉浮紧 → 风寒束表的重要证据。"
     },
     choiceTips: {
       风寒感冒: "当前证据中“恶寒明显、无汗、清涕、痰白、苔薄白、脉浮紧”与风寒感冒较吻合。",
@@ -297,7 +308,12 @@ const DATA = {
       "辛温解表，宣肺散寒": "治法方向与风寒束表较匹配。",
       "辛凉解表，疏风清热": "该治法更偏风热证，本案热象不突出，需谨慎。",
       "荆防败毒散加减": "该方方向偏疏风散寒，适合外感风寒、头痛身痛、无汗等表现。",
-      "银翘散加减": "银翘散偏辛凉解表，多用于风热表证。本案风寒证据更明显。"
+      "麻黄汤加减": "麻黄汤也在风寒节点下，偏风寒表实、无汗身痛；但本案普通感冒训练中，荆防败毒散方向更贴合。",
+      "桂枝汤加减": "桂枝汤也可连到风寒节点，但偏表虚有汗、营卫不和。本案无汗，匹配度不如荆防败毒散。",
+      "银翘散加减": "银翘散经风热节点连接，多用于风热表证。本案风寒证据更明显。",
+      "桑菊饮加减": "桑菊饮偏风热咳嗽方向，本案痰白清稀、恶寒明显，不是主线。",
+      "新加香薷饮加减": "新加香薷饮经暑湿节点连接，本案胃肠湿阻证据不足。",
+      "白虎加人参汤": "白虎加人参汤偏气分热盛、气津两伤，本案无高热汗出、口渴、脉洪大等证据。"
     },
     herbTips: {
       荆芥: "荆芥：疏风解表，适合外感风寒初起。",
@@ -381,6 +397,20 @@ const DATA = {
         { day: "第1天反馈", items: ["怕冷减轻", "鼻塞和清涕减少", "头痛身痛稍缓", "咳嗽仍有少量白稀痰"], tip: "辛温解表方向基本匹配，外寒逐渐松解，继续观察汗出与咳痰变化。" },
         { day: "第2天反馈", items: ["恶寒明显减轻", "清涕减少", "头痛身痛继续缓解", "精神较前好转"], tip: "风寒表证较前缓解，方证方向较合适。" },
         { day: "第3天反馈", items: ["鼻塞基本缓解", "身痛明显减轻", "低热消退", "睡眠恢复"], tip: "本案模拟恢复较好，可进入复盘。" }
+      ]
+    },
+    mahuang: {
+      label: "风寒感冒 + 麻黄汤加减：同属风寒网络，但方证偏峻",
+      days: [
+        { day: "第1天反馈", items: ["怕冷略减", "头痛身痛稍缓", "鼻塞清涕仍有", "患者感觉发散力量偏强"], tip: "麻黄汤与无汗、恶寒、身痛相关，但本案普通感冒更适合先考虑荆防败毒散方向。" },
+        { day: "第2天反馈", items: ["身痛继续减轻", "咳嗽和清涕改善一般", "精神略恢复"], tip: "图谱路径同属风寒，但方剂颗粒度需要进一步区分：表实无汗与普通风寒感冒不完全等同。" }
+      ]
+    },
+    guizhi: {
+      label: "风寒感冒 + 桂枝汤加减：风寒相关，但有汗/无汗证据不合",
+      days: [
+        { day: "第1天反馈", items: ["怕冷改善有限", "仍无明显出汗", "鼻涕仍清稀", "身痛仍在"], tip: "桂枝汤偏表虚有汗、营卫不和；本案无汗更明显，方证匹配不足。" },
+        { day: "第2天反馈", items: ["鼻塞仍有", "身痛略缓", "恶寒仍反复"], tip: "需回到症候节点：无汗、恶寒重、脉浮紧，更支持荆防败毒散或风寒表实相关路径。" }
       ]
     },
     windHeat: {
@@ -510,6 +540,7 @@ const state = {
   savedCases: { lin: false, zhou: false, wang: false },
   showCaseSummary: false,
   showAiPrompts: false,
+  showInfoPanel: false,
   coldDoseConfirmed: false,
   coldChoiceTip: "",
   coldHerbTip: "",
@@ -529,10 +560,14 @@ function render(page = state.page, options = {}) {
   const scrollY = window.scrollY;
   state.page = page;
   state.activeTab = tabForPage(page);
+  app.classList.toggle("no-page-motion", Boolean(options.preserveScroll || options.scrollInquiryBottom || options.noPageMotion));
   app.innerHTML = views[page] ? views[page]() : views.home();
+  app.classList.toggle("inquiry-mode", page === "inquiry");
   renderTabs();
   bindPageActions();
-  if (options.preserveScroll) {
+  if (options.scrollInquiryBottom) {
+    scrollInquiryToBottom();
+  } else if (options.preserveScroll) {
     window.scrollTo({ top: scrollY });
   } else {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -547,6 +582,7 @@ function tabForPage(page) {
 }
 
 function renderTabs() {
+  tabBar.classList.toggle("hidden", state.page === "inquiry");
   tabBar.innerHTML = DATA.tabs.map(([id, label, icon]) => `
     <button class="tab-button ${state.activeTab === id ? "active" : ""}" data-route="${id}">
       <span class="icon">${icon}</span>
@@ -648,56 +684,33 @@ const views = {
   },
   inquiry() {
     const p = getActivePatient();
-    const masteredInfo = p.masteredInfo || DATA.masteredInfo;
-    const pendingInfo = p.pendingInfo || DATA.pendingInfo;
-    const questions = getActiveQuestions();
+    const inquiry = getInquiryAnalysis();
+    const topic = isColdCase() ? "感冒初诊" : "失眠初诊";
     return `
-      <article class="page">
-        ${isColdCase() ? renderColdStageProgress("问诊取证") : ""}
-        ${pageTitle("继续问诊", "通过追问补全关键信息，帮助你完成辨证判断。")}
-        <section class="card inquiry-status">
-          <h3>已掌握信息</h3>
-          <div class="tag-row">${masteredInfo.map(item => `<span class="tag soft-green">${item}</span>`).join("")}</div>
-          <h3>待完善信息</h3>
-          <div class="tag-row">${pendingInfo.map(item => `<span class="tag soft-rice">${item}</span>`).join("")}</div>
-        </section>
-        <section class="card inquiry-input-card">
-          <h3>自由追问</h3>
-          <p class="muted">先自己向虚拟病人追问；想不起来时，再打开 AI 建议补漏。</p>
-          <div class="inquiry-input-row">
-            <input id="freeInquiryInput" class="inquiry-input" placeholder="${isColdCase() ? "向虚拟病人追问，例如：有没有出汗？" : "向虚拟病人追问，例如：最近有没有潮热盗汗？"}">
-            <button class="primary-btn send-btn" data-send-inquiry>发送</button>
-            <button class="ghost-btn voice-btn" data-voice-inquiry>语音</button>
+      <article class="page inquiry-page">
+        <section class="inquiry-topbar">
+          <div>
+            <h1>${p.name}｜${topic}</h1>
+            <p>已追问 ${inquiry.total} 个问题｜命中关键证据 ${inquiry.keyHitCount} 个</p>
+          </div>
+          <div class="inquiry-top-actions">
+            <button class="ghost-btn" data-route="patient">返回</button>
+            <button class="soft-btn" data-toggle-ai-prompts>AI建议补漏</button>
+            <button class="ghost-btn" data-toggle-info-panel>已掌握信息</button>
           </div>
         </section>
-        <section class="card">
-          <div class="section-head compact"><h2>问诊记录</h2><span class="tiny-pill">已纳入病案</span></div>
-          ${renderInquiryRecords()}
+        <section class="inquiry-thread" id="inquiryThread">
+          ${renderInquiryConversation()}
+          ${renderDiagnosisReadyCard(inquiry)}
+          <div id="inquiryEnd"></div>
         </section>
-        <section class="card ai-prompt-card">
-          <div class="section-head compact">
-            <h2>AI建议追问</h2>
-            <button class="soft-btn" data-toggle-ai-prompts>${state.showAiPrompts ? "收起" : "查看建议"}</button>
-          </div>
-          <p class="muted">当你完成自主追问后，可以打开建议检查是否有漏问。</p>
-          ${state.showAiPrompts ? `
-            <div class="recommend-list">
-              ${questions.map(item => {
-              const asked = hasAskedQuestion(item.question, item.key);
-                return `
-                  <div class="recommend-item ${asked ? "asked" : ""}">
-                    <span>${item.question}</span>
-                    <button class="${asked ? "soft-btn" : "ghost-btn"}" data-recommend-key="${item.key}">${asked ? "已问" : "追问"}</button>
-                  </div>
-                `;
-              }).join("")}
-            </div>
-          ` : ""}
+        <section class="inquiry-composer" aria-label="模拟问诊输入">
+          <input id="freeInquiryInput" class="inquiry-input" placeholder="${isColdCase() ? "向虚拟病人追问..." : "向虚拟病人追问..."}">
+          <button class="ghost-btn voice-btn" data-voice-inquiry>语音</button>
+          <button class="primary-btn send-btn" data-send-inquiry>发送</button>
         </section>
-        <div class="button-row">
-          <button class="ghost-btn" data-route="patient">返回病人信息</button>
-          <button class="primary-btn" data-route="diagnosis">开始辨证</button>
-        </div>
+        ${state.showAiPrompts ? renderAiPromptDrawer() : ""}
+        ${state.showInfoPanel ? renderInquiryInfoPanel() : ""}
       </article>
     `;
   },
@@ -1061,12 +1074,12 @@ function renderColdReview() {
         <div>证型：${selections.syndrome}</div><div>治法：${selections.method}</div><div>方剂：${selections.formula}</div>
         <div>中药配方：${formatHerbsWithDosage(selections.herbs) || "未选择"}</div><div>中成药：${selections.patent.join("、") || "未选择"}</div>
       </div></section>
-      <section class="card"><h3>标准思路</h3><div class="summary-list"><div>证型：风寒感冒</div><div>治法：辛温解表，宣肺散寒</div><div>参考方：荆防败毒散加减</div><div>中成药参考：风寒感冒颗粒 / 荆防颗粒 / 感冒清热颗粒</div></div></section>
+      <section class="card"><h3>标准思路</h3><div class="summary-list"><div>证型节点：风寒</div><div>治法：辛温解表，宣肺散寒</div><div>本案首选方剂节点：荆防败毒散加减</div><div>图谱相关方剂：麻黄汤加减、桂枝汤加减也连向风寒，但需进一步根据无汗/有汗、表实/表虚区分。</div><div>中成药参考：风寒感冒颗粒 / 荆防颗粒 / 感冒清热颗粒</div></div></section>
       ${reviewBlock("关键证据", ["空调低温、吹风后发作：外感风寒诱因", "恶寒明显、发热轻：风寒特征", "无汗：表寒束表", "鼻流清涕：寒象", "痰白清稀：寒痰或肺气不宣", "舌淡红、苔薄白：寒热不重，偏表寒", "脉浮紧：风寒束表"])}
-      ${reviewBlock("辨证路径复盘", ["第一步：从症候取证。恶寒明显、无汗、清涕、痰白、苔薄白、脉浮紧。", "第二步：症候汇聚为证。这些症候共同指向“风寒束表”，因此证型判断为风寒感冒。", "第三步：由证定法、由法选方。风寒束表 → 辛温解表、宣肺散寒 → 荆防败毒散加减。", "第四步：由方及药。荆芥、防风、羌活、独活负责疏风散寒；前胡、桔梗负责宣肺化痰；枳壳、茯苓、甘草、生姜辅助理气和中、调和药性。", "第五步：中成药匹配。风寒感冒颗粒、荆防颗粒、感冒清热颗粒更符合本案方向。"])}
+      ${reviewBlock("辨证路径复盘", ["第一步：从症候取证。恶寒明显、发热轻、流清涕、无汗、痰白清稀、苔薄白、脉浮紧。", "第二步：症候汇聚为证。这些症候在图谱中共同指向“风寒”节点。", "第三步：由证型节点进入方剂节点。风寒节点可连接荆防败毒散、麻黄汤、桂枝汤等多个方剂。", "第四步：本案进一步区分方剂。无汗、清涕、鼻塞喷嚏、头痛身痛支持荆防败毒散加减作为教学首选；麻黄汤偏表实发散，桂枝汤偏表虚有汗，本案匹配度较低。", "第五步：由方及药。荆芥、防风、羌活、独活负责疏风散寒；前胡、桔梗负责宣肺化痰；枳壳、茯苓、甘草、生姜辅助理气和中、调和药性。", "第六步：中成药匹配。风寒感冒颗粒、荆防颗粒、感冒清热颗粒更符合本案方向。"])}
       ${reviewBlock("干扰信息拆解", ["体温 37.5℃不等于风热，风寒感冒也可有轻度发热", "咽部不适不等于咽喉红肿热痛，需要继续追问疼痛程度、口渴、舌苔", "咳嗽不等于肺热，痰白清稀更支持寒象", "最近天气热不代表暑湿，本案没有明显腹胀、恶心、腹泻等湿阻中焦表现"])}
       <section class="card"><h3>问诊复盘</h3><div class="summary-list"><div>本次你共追问了 ${inquiry.total} 个问题，命中 ${inquiry.keyHitCount} 个感冒辨证关键点。</div><div>问诊完整度：${inquiry.completenessScore} 分。</div><div>${inquiry.pointComment}</div><div>${inquiry.missingComment}</div></div></section>
-      <section class="card"><h3>方药复盘</h3><p class="complaint">荆防败毒散偏于疏风散寒、解表祛湿，适用于外感风寒湿邪、恶寒发热、无汗、头痛身痛等表现。本案不宜优先使用银翘散、桑菊饮方向，因为风热证据不足。</p></section>
+      <section class="card"><h3>方剂图谱复盘</h3><p class="complaint">按照辨证堂感冒图谱，本案先由“恶寒重、流清涕、无汗、痰白清稀、苔薄白、脉浮紧”等症候聚合到风寒节点，再从风寒节点比较荆防败毒散、麻黄汤、桂枝汤。荆防败毒散更适合本案普通风寒感冒的教学主线；麻黄汤虽同属风寒相关，但偏表实发散；桂枝汤偏表虚有汗，与本案无汗不合。银翘散、桑菊饮属于风热路径，新加香薷饮属于暑湿路径，白虎加人参汤偏热盛气津两伤，均不是本案主线。</p></section>
       <section class="card"><h3>中成药复盘</h3><p class="complaint">风寒感冒颗粒、荆防颗粒、感冒清热颗粒更符合本案方向。银翘解毒丸、桑菊感冒片、双黄连口服液偏风热或热毒方向，不作为本案首选。</p></section>
       ${reviewBlock("你本案最关键的进步", ["能够区分“低热”和“风热”的关系", "抓住了恶寒、无汗、清涕、痰白、脉浮紧等关键证据", "能够排除银翘散、桑菊感冒片等风热方向", "初步完成了从证型到方剂、药味、中成药的完整匹配"])}
       ${reviewBlock("下次遇到感冒，先问这 6 个问题", ["怕冷明显还是发热明显？", "有没有汗？", "鼻涕清还是黄？", "咽痛口渴明显吗？", "痰白还是痰黄？", "基础信息中的舌苔和脉象支持哪类证据？"])}
@@ -1079,6 +1092,7 @@ function renderColdReview() {
 
 function renderColdReasoningChain() {
   const selections = getColdStudentSelections();
+  const formulaMeta = DATA.coldAnswer.formulaGraph[selections.formula] || {};
   const evidence = "恶寒明显 / 无汗 / 鼻流清涕 / 痰白清稀 / 苔薄白 / 脉浮紧";
   if (selections.syndrome === "风热感冒") {
     return reasoningSection("症候—证—方—药推理链", [
@@ -1098,10 +1112,10 @@ function renderColdReasoningChain() {
   const patentText = selections.patent.length ? selections.patent.join(" / ") : "未选择中成药";
   return reasoningSection("症候—证—方—药推理链", [
     ["症候证据", evidence],
-    ["证型判断", selections.syndrome || "未选择"],
-    ["治法方剂", `${selections.method || "未选择"} / ${selections.formula || "未选择"}`],
+    ["证型节点", `${selections.syndrome || "未选择"}（图谱对应：${formulaMeta.syndrome || "待判断"}）`],
+    ["方剂节点", `${selections.formula || "未选择"}｜${formulaMeta.relation || "待判断"}`],
     ["中药与中成药", `${herbText}<br>${patentText}`]
-  ], "你的路径基本完整：关键症候能够支撑风寒感冒判断，方剂方向与证型匹配，中药组成以疏风散寒、宣肺解表为主，中成药选择方向较一致。");
+  ], formulaMeta.note || "请根据图谱关系继续判断方剂与症候证据是否一致。");
 }
 
 function reasoningSection(title, nodes, comment = "") {
@@ -1125,13 +1139,14 @@ function reasoningSection(title, nodes, comment = "") {
 function renderColdPathCompare() {
   const answer = DATA.coldAnswer;
   const selections = getColdStudentSelections();
+  const formulaMeta = answer.formulaGraph[selections.formula] || { relation: "需调整" };
   const herbHits = selections.herbs.filter(item => answer.herbs.includes(item)).length;
   const herbWrong = selections.herbs.filter(item => !answer.herbs.includes(item)).length;
   const patentHits = selections.patent.filter(item => answer.patent.includes(item)).length;
   const rows = [
     ["证型", selections.syndrome || "未选择", answer.syndrome, selections.syndrome === answer.syndrome ? "正确" : "偏离"],
     ["治法", selections.method || "未选择", answer.method, selections.method === answer.method ? "正确" : "偏离"],
-    ["方剂", selections.formula || "未选择", answer.formula, selections.formula === answer.formula ? "正确" : "偏离"],
+    ["方剂", selections.formula || "未选择", "风寒节点下首选：荆防败毒散加减", selections.formula === answer.formula ? "正确" : formulaMeta.relation || "偏离"],
     ["中药", `选对 ${herbHits} 味${herbWrong ? `，混入 ${herbWrong} 味干扰药` : ""}`, "疏风散寒、宣肺解表为主", herbHits >= 8 && herbWrong <= 1 ? "较好" : "需调整"],
     ["中成药", selections.patent.join(" / ") || "未选择", "风寒类中成药", patentHits ? "正确" : "需调整"]
   ];
@@ -1278,6 +1293,7 @@ function renderColdDiagnosis() {
         ${firstGroups.map(([group, config]) => `
           <div class="form-group">
             <div class="form-title"><span>${group}</span><span class="muted">${config.multi ? "可多选" : "单选"}</span></div>
+            ${group === "方剂选择" ? `<p class="muted">请按感冒神经网络图，在方剂节点中选择与本案症候证据最匹配的方向。</p>` : ""}
             <div class="chip-grid">
               ${config.options.map(option => `<button class="chip ${config.selected.includes(option) ? "selected" : ""}" data-group="${group}" data-option="${option}">${renderColdOptionLabel(group, option)}</button>`).join("")}
             </div>
@@ -1361,7 +1377,7 @@ function renderColdDosage() {
       <p class="notice">本页面剂量仅用于中医教学训练和方药组成理解，不作为真实患者用药建议。</p>
       <div class="button-row">
         <button class="ghost-btn" data-route="diagnosis">返回调整药味</button>
-        <button class="primary-btn" data-confirm-dosage>确认配方，继续选择中成药</button>
+        <button class="primary-btn" data-confirm-dosage ${herbs.length ? "" : "disabled"}>确认配方，继续选择中成药</button>
       </div>
     </article>
   `;
@@ -1389,6 +1405,7 @@ function setActiveCase(caseId) {
   if (state.savedCases[caseId] === undefined) state.savedCases[caseId] = false;
   state.showCaseSummary = false;
   state.showAiPrompts = false;
+  state.showInfoPanel = false;
 }
 
 function isColdCase() {
@@ -1414,8 +1431,10 @@ function getActiveKnowledgeBase() {
 
 function getColdInquiryAnalysis() {
   const records = getCaseState().inquiryRecords;
-  const reviewKeys = ["怕冷", "发热", "汗", "鼻涕", "咽喉", "咽痛", "痰", "头痛", "身痛", "口渴", "胃肠"];
-  const hitKeys = [...new Set(records.map(record => record.matchedKey).filter(key => reviewKeys.includes(key)))];
+  const reviewKeys = ["怕冷", "发热", "汗", "鼻涕", "咽喉", "咽痛", "痰", "头痛", "身痛", "口渴", "胃肠", "舌象", "脉象"];
+  const hitKeys = [...new Set(records
+    .map(record => record.matchedKey === "清涕" ? "鼻涕" : record.matchedKey)
+    .filter(key => reviewKeys.includes(key)))];
   const weakCount = records.filter(record => record.relevance === "low" || record.matchedKey === "未匹配").length;
   const keyHitCount = hitKeys.length;
   let completenessScore = keyHitCount <= 1 ? 52 : keyHitCount <= 3 ? 68 + keyHitCount * 2 : Math.min(92, 78 + (keyHitCount - 4) * 3);
@@ -1440,11 +1459,27 @@ function getColdInquiryAnalysis() {
   };
 }
 
+function renderInquiryConversation() {
+  const p = getActivePatient();
+  const opener = isColdCase()
+    ? "我明天还有考试，结果今天一直打喷嚏、流清鼻涕，头也痛，身上酸，特别怕冷。昨天晚上空调开得有点低，还吹了风。"
+    : p.description;
+  return `
+    <div class="conversation-flow">
+      <div class="bubble-row patient">
+        <div class="bubble light"><span>${p.name}</span>${escapeHTML(opener)}</div>
+      </div>
+      ${renderInquiryRecords()}
+      ${getCaseState().inquiryRecords.length ? "" : `<div class="empty-record chat-empty">你可以先自己追问。想不起来时，再点顶部“AI建议补漏”。</div>`}
+    </div>
+  `;
+}
+
 function renderInquiryRecords() {
   const records = getCaseState().inquiryRecords;
   const patientName = getActivePatient().name;
   if (!records.length) {
-    return `<div class="empty-record">你还没有追问病人，建议先围绕睡眠、情绪、寒热、月经和二便继续问诊。</div>`;
+    return "";
   }
   return `
     <div class="chat-records">
@@ -1454,11 +1489,79 @@ function renderInquiryRecords() {
             <div class="bubble dark"><span>你</span>${escapeHTML(record.question)}</div>
           </div>
           <div class="bubble-row patient">
-            <div class="bubble light"><span>${patientName}</span>${escapeHTML(record.answer)}<em>已纳入病案</em></div>
+            <div class="bubble light"><span>${patientName}</span>${escapeHTML(record.answer)}</div>
           </div>
           ${record.coachTip ? `<div class="coach-tip">${escapeHTML(record.coachTip)}</div>` : ""}
         </div>
       `).join("")}
+    </div>
+  `;
+}
+
+function renderDiagnosisReadyCard(inquiry) {
+  if (inquiry.keyHitCount < 3) return "";
+  return `
+    <section class="ready-card">
+      <span class="badge green">证据已形成</span>
+      <h3>已获得 ${inquiry.keyHitCount} 条关键证据，可以开始辨证。</h3>
+      <p>系统会把本轮模拟问诊记录带入 AI 带教评估和病案复盘。</p>
+      <button class="primary-btn" data-route="diagnosis">开始辨证</button>
+    </section>
+  `;
+}
+
+function renderAiPromptDrawer() {
+  const questions = getActiveQuestions();
+  return `
+    <div class="sheet-mask" data-close-sheet>
+      <section class="bottom-sheet" aria-label="AI建议优先追问">
+        <div class="sheet-handle"></div>
+        <div class="sheet-head">
+          <div>
+            <h2>AI建议优先追问</h2>
+            <p class="muted">想不起来怎么问时，可以从这些关键问题里选择。</p>
+          </div>
+          <button class="ghost-btn" data-toggle-ai-prompts>关闭</button>
+        </div>
+        <div class="recommend-list">
+          ${questions.map(item => {
+            const asked = hasAskedQuestion(item.question, item.key);
+            return `
+              <div class="recommend-item ${asked ? "asked" : ""}">
+                <span>${item.question}</span>
+                <button class="${asked ? "soft-btn" : "ghost-btn"}" data-recommend-key="${item.key}">${asked ? "已问" : "直接追问"}</button>
+              </div>
+            `;
+          }).join("")}
+        </div>
+        <div class="sheet-actions">
+          <button class="ghost-btn full" data-toggle-ai-prompts>收起建议</button>
+        </div>
+      </section>
+    </div>
+  `;
+}
+
+function renderInquiryInfoPanel() {
+  const p = getActivePatient();
+  const masteredInfo = p.masteredInfo || DATA.masteredInfo;
+  const pendingInfo = p.pendingInfo || DATA.pendingInfo;
+  return `
+    <div class="sheet-mask info-mask" data-close-info>
+      <section class="info-panel" aria-label="已掌握信息">
+        <div class="section-head compact">
+          <h2>已掌握信息</h2>
+          <button class="ghost-btn" data-toggle-info-panel>关闭</button>
+        </div>
+        <div class="info-panel-block">
+          <h3>已掌握信息</h3>
+          <div class="tag-row">${masteredInfo.map(item => `<span class="tag soft-green">${item}</span>`).join("")}</div>
+        </div>
+        <div class="info-panel-block">
+          <h3>待完善信息</h3>
+          <div class="tag-row">${pendingInfo.map(item => `<span class="tag soft-rice">${item}</span>`).join("")}</div>
+        </div>
+      </section>
     </div>
   `;
 }
@@ -1500,12 +1603,13 @@ function bindPageActions() {
     button.addEventListener("click", () => {
       const item = getActiveQuestions().find(q => q.key === button.dataset.recommendKey);
       if (!item) return;
-      if (hasAskedQuestion(item.question)) {
+      if (hasAskedQuestion(item.question, item.key)) {
         showToast("这个问题已经问过了。");
         return;
       }
       addInquiryRecord(item.question, matchPatientAnswer(item.question, item.key), "recommended");
-      render("inquiry", { preserveScroll: true });
+      state.showAiPrompts = false;
+      render("inquiry", { scrollInquiryBottom: true });
     });
   });
 
@@ -1518,7 +1622,15 @@ function bindPageActions() {
         return;
       }
       addInquiryRecord(question, matchPatientAnswer(question), "free");
-      render("inquiry", { preserveScroll: true });
+      render("inquiry", { scrollInquiryBottom: true });
+    });
+  });
+
+  app.querySelectorAll("#freeInquiryInput").forEach(input => {
+    input.addEventListener("keydown", event => {
+      if (event.key !== "Enter") return;
+      event.preventDefault();
+      app.querySelector("[data-send-inquiry]")?.click();
     });
   });
 
@@ -1531,6 +1643,31 @@ function bindPageActions() {
   app.querySelectorAll("[data-toggle-ai-prompts]").forEach(button => {
     button.addEventListener("click", () => {
       state.showAiPrompts = !state.showAiPrompts;
+      if (state.showAiPrompts) state.showInfoPanel = false;
+      render("inquiry", { preserveScroll: true });
+    });
+  });
+
+  app.querySelectorAll("[data-toggle-info-panel]").forEach(button => {
+    button.addEventListener("click", () => {
+      state.showInfoPanel = !state.showInfoPanel;
+      if (state.showInfoPanel) state.showAiPrompts = false;
+      render("inquiry", { preserveScroll: true });
+    });
+  });
+
+  app.querySelectorAll("[data-close-sheet]").forEach(mask => {
+    mask.addEventListener("click", event => {
+      if (event.target !== mask) return;
+      state.showAiPrompts = false;
+      render("inquiry", { preserveScroll: true });
+    });
+  });
+
+  app.querySelectorAll("[data-close-info]").forEach(mask => {
+    mask.addEventListener("click", event => {
+      if (event.target !== mask) return;
+      state.showInfoPanel = false;
       render("inquiry", { preserveScroll: true });
     });
   });
@@ -1544,6 +1681,10 @@ function bindPageActions() {
 
   app.querySelectorAll("[data-confirm-dosage]").forEach(button => {
     button.addEventListener("click", () => {
+      if (!state.coldSelections["中药配方选择"].selected.length) {
+        showToast("请先选择中药组成。");
+        return;
+      }
       state.coldDoseConfirmed = true;
       render("diagnosis");
     });
@@ -1599,6 +1740,17 @@ function showToast(message) {
   showToast.timer = setTimeout(() => toast.classList.remove("show"), 1800);
 }
 
+function scrollInquiryToBottom() {
+  setTimeout(() => {
+    const thread = document.querySelector("#inquiryThread");
+    if (thread) {
+      thread.scrollTo({ top: thread.scrollHeight, behavior: "smooth" });
+      return;
+    }
+    document.querySelector("#inquiryEnd")?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, 60);
+}
+
 function showStageToast(route) {
   if (!isColdCase()) return;
   const inquiry = getInquiryAnalysis();
@@ -1649,14 +1801,32 @@ function normalizeQuestion(question) {
 
 function matchPatientAnswer(question, preferredKey = "") {
   const normalized = question.replace(/\s/g, "");
-  if (/舌象|舌苔|脉象|浮紧|浮数/.test(normalized)) {
+  if (/舌象|舌苔/.test(normalized) || preferredKey === "舌象") {
     return {
-      key: "基础观察",
-      answer: "这个需要老师或系统根据基础信息观察判断，我作为虚拟病人说不清楚。你可以在病人信息页查看舌象和脉象。",
-      relevance: "low"
+      key: "舌象",
+      answer: `系统基础观察：${getActivePatient().basics?.舌象 || "舌象信息见基础信息卡。"}。`,
+      relevance: "medium"
+    };
+  }
+  if (/脉象|浮紧|浮数/.test(normalized) || preferredKey === "脉象") {
+    return {
+      key: "脉象",
+      answer: `系统基础观察：${getActivePatient().basics?.脉象 || "脉象信息见基础信息卡。"}。`,
+      relevance: "medium"
     };
   }
   const knowledgeBase = getActiveKnowledgeBase();
+  if (isColdCase()) {
+    const priorityKey = /痰色|咳痰|白痰|黄痰|痰/.test(normalized)
+      ? "痰"
+      : /鼻涕|流涕|清涕|黄涕|清鼻涕/.test(normalized)
+        ? "鼻涕"
+        : /咽喉|咽痛|喉咙|嗓子|红肿/.test(normalized)
+          ? "咽痛"
+          : "";
+    const priority = knowledgeBase.find(item => item.key === priorityKey);
+    if (priority) return priority;
+  }
   const preferred = knowledgeBase.find(item => item.key === preferredKey);
   if (preferred) return preferred;
 
@@ -1673,10 +1843,10 @@ function matchPatientAnswer(question, preferredKey = "") {
   return {
     key: "未匹配",
     answer: isColdCase()
-      ? "这个情况我没有特别明显，你可以围绕怕冷发热、汗出、鼻涕、咽喉、痰色和二便继续问我。"
+      ? "这个情况我没有特别明显。"
       : (question.length % 2 === 0
-        ? "这个情况我没有特别明显，你可以换个方向继续问我。"
-        : "我不太确定这个问题和睡眠有没有关系，你可以再具体问问。"),
+        ? "这个情况我没有特别明显。"
+        : "这个问题我不太确定，平时没有特别明显的感觉。"),
     relevance: "low"
   };
 }
@@ -1764,8 +1934,9 @@ function getColdAssessmentResult() {
   const coldHerbWrong = selections.herbs.filter(item => answer.coldHerbs.includes(item)).length;
   const patentHits = selections.patent.filter(item => answer.patent.includes(item)).length;
   const patentWrong = selections.patent.filter(item => !answer.patent.includes(item)).length;
+  const formulaMeta = answer.formulaGraph[selections.formula] || { score: 50, note: "该方不在本案感冒图谱的主要路径中。", relation: "需调整" };
   const syndromeScore = selections.syndrome === answer.syndrome ? 90 : selections.syndrome === "风热感冒" ? 62 : 58;
-  const formulaScore = selections.formula === answer.formula ? 88 : selections.formula === "银翘散加减" ? 60 : selections.formula === "新加香薷饮加减" ? 64 : 58;
+  const formulaScore = formulaMeta.score;
   const herbScore = clamp(Math.round((herbHits / answer.herbs.length) * 92) - herbWrong * 5 - coldHerbWrong * 6, 35, 95);
   const patentScore = clamp(62 + patentHits * 11 - patentWrong * 8, 35, 95);
   const safetyScore = clamp(88 - coldHerbWrong * 8 - patentWrong * 4, 45, 92);
@@ -1784,7 +1955,7 @@ function getColdAssessmentResult() {
     tag,
     dimensions,
     comment: selections.syndrome === "风寒感冒"
-      ? "你抓住了“恶寒重、发热轻、无汗、鼻流清涕、痰白清稀、苔薄白、脉浮紧”等关键证据，能够判断为风寒感冒。治法选择“辛温解表，宣肺散寒”较准确，方剂选择荆防败毒散加减方向正确。"
+      ? `你抓住了“恶寒重、发热轻、无汗、鼻流清涕、痰白清稀、苔薄白、脉浮紧”等关键证据，能够判断为风寒感冒。方剂图谱判断：${formulaMeta.note}`
       : "当前证型判断与本案关键证据仍有偏差。请回看恶寒明显、无汗、清涕、痰白清稀、苔薄白、脉浮紧等风寒表证证据。",
     herbComment: coldHerbWrong
       ? "你选择了较多偏寒凉清热药物，如金银花、连翘、石膏、黄芩等。本案热象不明显，这类药物更偏风热或实热方向，不宜作为主线。"
@@ -1801,14 +1972,19 @@ function getColdFeedbackScenario() {
   const coldHerbWrong = selections.herbs.filter(item => answer.coldHerbs.includes(item)).length;
   if (coldHerbWrong >= 2) return DATA.coldFeedbackMap.coldHerbs;
   if (selections.syndrome === "风寒感冒" && selections.formula === "荆防败毒散加减" && selections.patent.some(item => answer.patent.includes(item))) return DATA.coldFeedbackMap.correct;
-  if (selections.syndrome === "风热感冒" || selections.formula === "银翘散加减" || selections.patent.includes("银翘解毒丸")) return DATA.coldFeedbackMap.windHeat;
+  if (selections.formula === "麻黄汤加减") return DATA.coldFeedbackMap.mahuang;
+  if (selections.formula === "桂枝汤加减") return DATA.coldFeedbackMap.guizhi;
+  if (selections.syndrome === "风热感冒" || ["银翘散加减", "桑菊饮加减"].includes(selections.formula) || selections.patent.includes("银翘解毒丸")) return DATA.coldFeedbackMap.windHeat;
   if (selections.syndrome === "暑湿感冒" || selections.formula === "新加香薷饮加减" || selections.patent.includes("藿香正气水")) return DATA.coldFeedbackMap.dampSummer;
+  if (selections.formula === "白虎加人参汤") return DATA.coldFeedbackMap.windHeat;
   return DATA.coldFeedbackMap.windHeat;
 }
 
 function getColdObservationPreview() {
   const selections = getColdStudentSelections();
-  if (selections.syndrome === "风热感冒" || selections.formula === "银翘散加减") return "风险观察：辛凉清解方向可能无法改善怕冷、清涕和身痛。";
+  if (selections.formula === "麻黄汤加减") return "风险观察：同属风寒网络，但发散力量偏强，需要观察鼻塞清涕与体力反应。";
+  if (selections.formula === "桂枝汤加减") return "风险观察：桂枝汤偏表虚有汗，本案无汗证据明显，可能改善有限。";
+  if (selections.syndrome === "风热感冒" || ["银翘散加减", "桑菊饮加减", "白虎加人参汤"].includes(selections.formula)) return "风险观察：风热或热盛方向可能无法改善怕冷、清涕和身痛。";
   if (selections.syndrome === "暑湿感冒" || selections.formula === "新加香薷饮加减") return "风险观察：若胃肠症状不突出，化湿方向可能无法切中主证。";
   return "预计观察重点：怕冷、鼻涕、头痛身痛、咳痰变化。";
 }
