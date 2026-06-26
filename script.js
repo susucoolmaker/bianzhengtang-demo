@@ -541,14 +541,16 @@ const state = {
   showCaseSummary: false,
   showAiPrompts: false,
   showInfoPanel: false,
+  showPendingInfo: false,
   coldDoseConfirmed: false,
   coldChoiceTip: "",
   coldHerbTip: "",
   coldPatentTip: "",
+  pendingUnlockCue: null,
   caseStates: {
-    lin: { inquiryRecords: [] },
-    zhou: { inquiryRecords: [] },
-    wang: { inquiryRecords: [] }
+    lin: { inquiryRecords: [], unlockedInfo: [] },
+    zhou: { inquiryRecords: [], unlockedInfo: [] },
+    wang: { inquiryRecords: [], unlockedInfo: [] }
   }
 };
 
@@ -565,6 +567,10 @@ function render(page = state.page, options = {}) {
   app.classList.toggle("inquiry-mode", page === "inquiry");
   renderTabs();
   bindPageActions();
+  if (page === "inquiry" && state.pendingUnlockCue) {
+    playInfoUnlockEffect(state.pendingUnlockCue);
+    state.pendingUnlockCue = null;
+  }
   if (options.scrollInquiryBottom) {
     scrollInquiryToBottom();
   } else if (options.preserveScroll) {
@@ -686,6 +692,7 @@ const views = {
     const p = getActivePatient();
     const inquiry = getInquiryAnalysis();
     const topic = isColdCase() ? "感冒初诊" : "失眠初诊";
+    const masteredInfo = getMasteredInfoItems();
     return `
       <article class="page inquiry-page">
         <section class="inquiry-topbar">
@@ -696,7 +703,7 @@ const views = {
           <div class="inquiry-top-actions">
             <button class="ghost-btn" data-route="patient">返回</button>
             <button class="soft-btn" data-toggle-ai-prompts>AI建议补漏</button>
-            <button class="ghost-btn" data-toggle-info-panel>已掌握信息</button>
+            <button class="ghost-btn info-entry-btn" data-toggle-info-panel>已掌握信息 <span class="tiny-count">${masteredInfo.length}</span></button>
           </div>
         </section>
         <section class="inquiry-thread" id="inquiryThread">
@@ -1417,7 +1424,7 @@ function getActivePatient() {
 }
 
 function getCaseState() {
-  if (!state.caseStates[state.activeCaseId]) state.caseStates[state.activeCaseId] = { inquiryRecords: [] };
+  if (!state.caseStates[state.activeCaseId]) state.caseStates[state.activeCaseId] = { inquiryRecords: [], unlockedInfo: [] };
   return state.caseStates[state.activeCaseId];
 }
 
@@ -1427,6 +1434,45 @@ function getActiveQuestions() {
 
 function getActiveKnowledgeBase() {
   return getActivePatient().knowledgeBase || DATA.patientKnowledgeBase;
+}
+
+function getInfoUnlockMap() {
+  if (isColdCase()) {
+    return {
+      汗: "汗出",
+      咽喉: "咽痛",
+      咽痛: "咽痛",
+      痰: "痰色",
+      胃肠: "胃肠症状",
+      口渴: "口渴"
+    };
+  }
+  return {
+    病程: "病程",
+    怕冷怕热: "寒热",
+    胸胁胀满: "胸胁",
+    月经: "月经",
+    心悸健忘: "心悸",
+    纳差便溏: "饮食二便",
+    饮食: "饮食二便",
+    大便: "饮食二便",
+    潮热盗汗: "潮热盗汗",
+    痰多胸闷: "痰多胸闷"
+  };
+}
+
+function getMasteredInfoItems() {
+  const patient = getActivePatient();
+  const base = patient.masteredInfo || DATA.masteredInfo;
+  const unlocked = getCaseState().unlockedInfo || [];
+  return [...base, ...unlocked.filter(item => !base.includes(item))];
+}
+
+function getPendingInfoItems() {
+  const patient = getActivePatient();
+  const base = patient.pendingInfo || DATA.pendingInfo;
+  const unlocked = getCaseState().unlockedInfo || [];
+  return base.filter(item => !unlocked.includes(item));
 }
 
 function getColdInquiryAnalysis() {
@@ -1543,9 +1589,8 @@ function renderAiPromptDrawer() {
 }
 
 function renderInquiryInfoPanel() {
-  const p = getActivePatient();
-  const masteredInfo = p.masteredInfo || DATA.masteredInfo;
-  const pendingInfo = p.pendingInfo || DATA.pendingInfo;
+  const masteredInfo = getMasteredInfoItems();
+  const pendingInfo = getPendingInfoItems();
   return `
     <div class="sheet-mask info-mask" data-close-info>
       <section class="info-panel" aria-label="已掌握信息">
@@ -1557,10 +1602,15 @@ function renderInquiryInfoPanel() {
           <h3>已掌握信息</h3>
           <div class="tag-row">${masteredInfo.map(item => `<span class="tag soft-green">${item}</span>`).join("")}</div>
         </div>
-        <div class="info-panel-block">
-          <h3>待完善信息</h3>
-          <div class="tag-row">${pendingInfo.map(item => `<span class="tag soft-rice">${item}</span>`).join("")}</div>
+        <div class="info-panel-toggle">
+          <button class="ghost-btn full" data-toggle-pending-info>${state.showPendingInfo ? "收起待完善信息" : "查看待完善信息"}</button>
         </div>
+        ${state.showPendingInfo ? `
+          <div class="info-panel-block">
+            <h3>待完善信息</h3>
+            <div class="tag-row">${pendingInfo.map(item => `<span class="tag soft-rice">${item}</span>`).join("")}</div>
+          </div>
+        ` : ""}
       </section>
     </div>
   `;
@@ -1621,7 +1671,8 @@ function bindPageActions() {
         showToast("请先输入你想追问的问题。");
         return;
       }
-      addInquiryRecord(question, matchPatientAnswer(question), "free");
+      const unlockedInfo = addInquiryRecord(question, matchPatientAnswer(question), "free");
+      if (unlockedInfo) state.pendingUnlockCue = { label: unlockedInfo };
       render("inquiry", { scrollInquiryBottom: true });
     });
   });
@@ -1652,6 +1703,14 @@ function bindPageActions() {
     button.addEventListener("click", () => {
       state.showInfoPanel = !state.showInfoPanel;
       if (state.showInfoPanel) state.showAiPrompts = false;
+      if (!state.showInfoPanel) state.showPendingInfo = false;
+      render("inquiry", { preserveScroll: true });
+    });
+  });
+
+  app.querySelectorAll("[data-toggle-pending-info]").forEach(button => {
+    button.addEventListener("click", () => {
+      state.showPendingInfo = !state.showPendingInfo;
       render("inquiry", { preserveScroll: true });
     });
   });
@@ -1668,6 +1727,7 @@ function bindPageActions() {
     mask.addEventListener("click", event => {
       if (event.target !== mask) return;
       state.showInfoPanel = false;
+      state.showPendingInfo = false;
       render("inquiry", { preserveScroll: true });
     });
   });
@@ -1740,6 +1800,72 @@ function showToast(message) {
   showToast.timer = setTimeout(() => toast.classList.remove("show"), 1800);
 }
 
+function playInfoUnlockEffect(cue) {
+  if (!cue?.label) return;
+  const target = app.querySelector("[data-toggle-info-panel]");
+  if (!target) return;
+  const pairs = app.querySelectorAll(".chat-pair");
+  const lastPair = pairs[pairs.length - 1];
+  const source = lastPair?.querySelector(".coach-tip") || lastPair?.querySelector(".bubble.light") || app.querySelector("#freeInquiryInput");
+  if (!source) return;
+  const startRect = source.getBoundingClientRect();
+  const endRect = target.getBoundingClientRect();
+  const chip = document.createElement("div");
+  chip.className = "info-fly-chip";
+  chip.textContent = cue.label;
+  const startX = startRect.left + Math.min(startRect.width - 24, 40);
+  const startY = startRect.top + Math.max(18, Math.min(startRect.height / 2, 42));
+  const endX = endRect.left + endRect.width / 2;
+  const endY = endRect.top + endRect.height / 2;
+  chip.style.left = `${startX}px`;
+  chip.style.top = `${startY}px`;
+  chip.style.setProperty("--fly-x", `${endX - startX}px`);
+  chip.style.setProperty("--fly-y", `${endY - startY}px`);
+  document.body.appendChild(chip);
+  requestAnimationFrame(() => {
+    chip.classList.add("animate");
+    target.classList.add("info-entry-pulse");
+  });
+  playInfoUnlockTone();
+  chip.addEventListener("animationend", () => {
+    chip.remove();
+    target.classList.remove("info-entry-pulse");
+  }, { once: true });
+}
+
+function playInfoUnlockTone() {
+  try {
+    const AudioCtor = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtor) return;
+    playInfoUnlockTone.ctx = playInfoUnlockTone.ctx || new AudioCtor();
+    const ctx = playInfoUnlockTone.ctx;
+    if (ctx.state === "suspended") ctx.resume();
+    const now = ctx.currentTime;
+    const gain = ctx.createGain();
+    gain.connect(ctx.destination);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.08, now + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
+
+    const oscA = ctx.createOscillator();
+    oscA.type = "sine";
+    oscA.frequency.setValueAtTime(740, now);
+    oscA.frequency.linearRampToValueAtTime(880, now + 0.16);
+    oscA.connect(gain);
+    oscA.start(now);
+    oscA.stop(now + 0.28);
+
+    const oscB = ctx.createOscillator();
+    oscB.type = "triangle";
+    oscB.frequency.setValueAtTime(988, now + 0.04);
+    oscB.connect(gain);
+    oscB.start(now + 0.04);
+    oscB.stop(now + 0.18);
+  } catch (error) {
+    // Ignore audio failures; the visual cue is still enough.
+  }
+}
+
 function scrollInquiryToBottom() {
   setTimeout(() => {
     const thread = document.querySelector("#inquiryThread");
@@ -1777,14 +1903,27 @@ function hasAskedQuestion(question, key = "") {
 }
 
 function addInquiryRecord(question, result, source) {
+  const unlockedInfo = unlockInfoByKey(result.key);
   getCaseState().inquiryRecords.push({
     question,
     answer: result.answer,
     matchedKey: result.key,
     relevance: result.relevance,
     source,
-    coachTip: getInquiryCoachTip(result)
+    coachTip: getInquiryCoachTip(result),
+    unlockedInfo
   });
+  return unlockedInfo;
+}
+
+function unlockInfoByKey(key) {
+  const label = getInfoUnlockMap()[key];
+  if (!label) return "";
+  const caseState = getCaseState();
+  caseState.unlockedInfo = caseState.unlockedInfo || [];
+  if (caseState.unlockedInfo.includes(label)) return "";
+  caseState.unlockedInfo.push(label);
+  return label;
 }
 
 function getInquiryCoachTip(result) {
