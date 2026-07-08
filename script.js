@@ -1113,42 +1113,48 @@ const DATA = {
       label: "风寒感冒 + 麻黄汤加减：同属风寒网络，但方证偏峻",
       days: [
         { day: "第1天反馈", items: ["怕冷略减", "头痛身痛稍缓", "鼻塞清涕仍有", "患者感觉发散力量偏强"], tip: "麻黄汤与无汗、恶寒、身痛相关，但本案普通感冒更适合先考虑荆防败毒散方向。" },
-        { day: "第2天反馈", items: ["身痛继续减轻", "咳嗽和清涕改善一般", "精神略恢复"], tip: "图谱路径同属风寒，但方剂颗粒度需要进一步区分：表实无汗与普通风寒感冒不完全等同。" }
+        { day: "第2天反馈", items: ["身痛继续减轻", "咳嗽和清涕改善一般", "精神略恢复"], tip: "图谱路径同属风寒，但方剂颗粒度需要进一步区分：表实无汗与普通风寒感冒不完全等同。" },
+        { day: "第3天反馈", items: ["恶寒已减", "鼻塞仍未完全缓解", "清涕减少但恢复不够顺畅", "整体改善仍慢于预期"], tip: "说明方向相关，但教学首选仍应回到更贴合普通风寒感冒的荆防败毒散路径。" }
       ]
     },
     guizhi: {
       label: "风寒感冒 + 桂枝汤加减：风寒相关，但有汗/无汗证据不合",
       days: [
         { day: "第1天反馈", items: ["怕冷改善有限", "仍无明显出汗", "鼻涕仍清稀", "身痛仍在"], tip: "桂枝汤偏表虚有汗、营卫不和；本案无汗更明显，方证匹配不足。" },
-        { day: "第2天反馈", items: ["鼻塞仍有", "身痛略缓", "恶寒仍反复"], tip: "需回到症候节点：无汗、恶寒重、脉浮紧，更支持荆防败毒散或风寒表实相关路径。" }
+        { day: "第2天反馈", items: ["鼻塞仍有", "身痛略缓", "恶寒仍反复"], tip: "需回到症候节点：无汗、恶寒重、脉浮紧，更支持荆防败毒散或风寒表实相关路径。" },
+        { day: "第3天反馈", items: ["清涕仍时有反复", "怕冷未完全退去", "头身不适缓解不稳", "恢复节奏偏慢"], tip: "说明药路和风寒有关，但和本案核心证据之间仍有关键缝隙，尤其是无汗这一条。" }
       ]
     },
     windHeat: {
       label: "风热感冒 + 银翘散 / 银翘解毒丸：辛凉清解方向偏离",
       days: [
         { day: "第1天反馈", items: ["咽部不适略减", "怕冷、清涕、身痛没有明显改善", "胃口略下降"], tip: "辛凉清解方向可能偏离。本案风寒证据更明显，如恶寒重、无汗、清涕、苔薄白、脉浮紧。" },
-        { day: "第2天反馈", items: ["仍怕冷", "鼻涕仍清稀", "腹部发凉", "精神一般"], tip: "需重新回到风寒与风热证据鉴别。" }
+        { day: "第2天反馈", items: ["仍怕冷", "鼻涕仍清稀", "腹部发凉", "精神一般"], tip: "需重新回到风寒与风热证据鉴别。" },
+        { day: "第3天反馈", items: ["鼻塞和身痛恢复依旧有限", "清涕仍未转止", "怕冷感残留", "整体恢复不顺"], tip: "说明辛凉清解没有切中当前病机，复盘重点应回到恶寒、无汗、清涕这些风寒证据。" }
       ]
     },
     dampSummer: {
       label: "暑湿感冒方向：胃肠症状不突出，暑湿证据不足",
       days: [
         { day: "第1天反馈", items: ["胃口略好", "怕冷、清涕、头痛身痛改善有限"], tip: "本案胃肠症状不突出，暑湿证据不足。应重新关注起病诱因、汗出、鼻涕和脉象。" },
-        { day: "第2天反馈", items: ["鼻塞仍在", "清涕仍明显", "身痛改善有限"], tip: "暑湿方向不是本案主线，建议回看风寒表证。" }
+        { day: "第2天反馈", items: ["鼻塞仍在", "清涕仍明显", "身痛改善有限"], tip: "暑湿方向不是本案主线，建议回看风寒表证。" },
+        { day: "第3天反馈", items: ["胃肠并无明显异常变化", "怕冷与清涕仍拖着恢复", "低热退得不够利落", "整体恢复偏慢"], tip: "这类变化提示暑湿线索不够成主线，还是要回到风寒表证的核心证据上来。" }
       ]
     },
     coldHerbs: {
       label: "寒凉清热药物选择偏多：可能影响辛温解表方向",
       days: [
         { day: "第1天反馈", items: ["咽部不适略缓", "怕冷仍明显", "清涕和身痛改善有限", "胃口略受影响"], tip: "你选择了较多偏寒凉清热药物，但本案热象不明显，可能影响辛温解表方向。建议回到症候证据重新判断。" },
-        { day: "第2天反馈", items: ["仍有畏寒", "鼻涕仍清稀", "腹部偏凉", "精神一般"], tip: "寒凉药物不宜作为本案主线。" }
+        { day: "第2天反馈", items: ["仍有畏寒", "鼻涕仍清稀", "腹部偏凉", "精神一般"], tip: "寒凉药物不宜作为本案主线。" },
+        { day: "第3天反馈", items: ["症状改善仍不理想", "清涕和鼻塞恢复拖慢", "怕冷感未尽", "体力恢复一般"], tip: "说明清热药放得过重会拖住辛温解表的主线，复盘时要重点回看药味寒热方向。" }
       ]
     },
     groupMismatch: {
       label: "药组理解还不完整：主力药组搭配需要再校一遍",
       days: [
         { day: "第1天反馈", items: ["怕冷略减", "鼻塞和清涕改善不稳定", "咳嗽时轻时重", "整体恢复节奏偏慢"], tip: "你已经抓到了一部分方向，但主力药组搭配还不够完整。建议回看风寒解表、宣肺化痰和和中辅助三组的分工。" },
-        { day: "第2天反馈", items: ["头痛身痛仍有残留", "咽部不适时有反复", "精神恢复一般", "病情变化不够顺畅"], tip: "这类反馈常提示：主线抓到了，但药组之间的配合还需要更清楚。" }
+        { day: "第2天反馈", items: ["头痛身痛仍有残留", "咽部不适时有反复", "精神恢复一般", "病情变化不够顺畅"], tip: "这类反馈常提示：主线抓到了，但药组之间的配合还需要更清楚。" },
+        { day: "第3天反馈", items: ["鼻塞减轻但未完全缓解", "身痛仍有尾巴", "清涕减少不够稳定", "恢复节奏仍显拖沓"], tip: "说明方向基础是对的，但药组分工还没有完全站稳。复盘时要回看主攻、配合、辅助三组的协同关系。" }
       ]
     }
   },
@@ -1264,6 +1270,7 @@ const state = {
   coldLearningStep: 1,
   coldGroupSelections: [],
   coldGroupSubmitted: false,
+  coldGroupReviewMode: false,
   coldExpandedHerbPanels: [],
   coldShowSyndromePathCard: false,
   coldShowFormulaPathCard: false,
@@ -1283,8 +1290,23 @@ const state = {
 const app = document.querySelector("#app");
 const tabBar = document.querySelector("#tabBar");
 const toast = document.querySelector("#toast");
+const inquiryRenderScheduler = {
+  rafId: 0,
+  caseId: "",
+  options: null
+};
+const INQUIRY_FLOW_STAGE_ORDER = {
+  waiting: 0,
+  typing: 1,
+  reply: 2,
+  teaching: 3,
+  quiz: 4,
+  "wait-choice": 5,
+  finished: 6
+};
 
 function render(page = state.page, options = {}) {
+  captureInquiryThreadState();
   const scrollY = window.scrollY;
   state.page = page;
   state.activeTab = tabForPage(page);
@@ -1298,13 +1320,101 @@ function render(page = state.page, options = {}) {
     playInfoUnlockEffect(state.pendingUnlockCue);
     state.pendingUnlockCue = null;
   }
-  if (options.scrollInquiryBottom) {
+  if (page === "inquiry") {
+    applyInquiryThreadRenderState(options);
+    resumePendingInquiryFlow();
+  }
+  if (page === "inquiry" && (options.inquiryScrollAction || options.preserveThreadScroll || options.noPageMotion || options.preserveScroll)) {
+    // Inquiry page uses its own inner scroll management.
+  } else if (options.scrollInquiryBottom) {
     scrollInquiryToBottom();
   } else if (options.preserveScroll) {
     window.scrollTo({ top: scrollY });
   } else {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
+  if (page === "inquiry" && options.focusInquiryInput) {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(focusInquiryInput);
+    });
+  }
+}
+
+function captureInquiryThreadState() {
+  if (state.page !== "inquiry") return;
+  const thread = document.querySelector("#inquiryThread");
+  if (!thread) return;
+  const caseState = getCaseState();
+  const viewport = caseState.inquiryViewport;
+  const flowState = caseState.inquiryFlow;
+  viewport.lastScrollTop = thread.scrollTop;
+  if (flowState.running || Date.now() < (viewport.programmaticScrollingUntil || 0)) {
+    return;
+  }
+  const distanceFromBottom = thread.scrollHeight - thread.clientHeight - thread.scrollTop;
+  viewport.autoFollow = distanceFromBottom <= 160;
+  viewport.showReturnLatest = !viewport.autoFollow;
+}
+
+function applyInquiryThreadRenderState(options = {}) {
+  const thread = document.querySelector("#inquiryThread");
+  if (!thread) return;
+  const caseState = getCaseState();
+  const viewport = caseState.inquiryViewport;
+  const flowState = caseState.inquiryFlow;
+  bindInquiryThreadScroll(thread);
+  syncInquiryReturnLatestButton();
+  if (options.inquiryScrollAction === "turn-start" && options.turnId) {
+    scrollInquiryToTurnStart(options.turnId, options.scrollBehavior || "smooth");
+    return;
+  }
+  if (options.inquiryScrollAction === "turn-keep-latest" && options.turnId) {
+    ensureInquiryTurnVisible(options.turnId, options.scrollBehavior || "auto");
+    return;
+  }
+  if (options.preserveThreadScroll || options.preserveScroll) {
+    thread.scrollTop = viewport.lastScrollTop || 0;
+    return;
+  }
+  if (viewport.lockedTurnId && flowState.running) {
+    ensureInquiryTurnVisible(viewport.lockedTurnId, "auto");
+    return;
+  }
+  thread.scrollTop = viewport.lastScrollTop || 0;
+}
+
+function scrollActiveEvidenceGuideIntoView() {
+  const activeBlock = app.querySelector(".evidence-status-block.active");
+  if (!activeBlock) return;
+  const rect = activeBlock.getBoundingClientRect();
+  const topPadding = 96;
+  const bottomPadding = 120;
+  let nextTop = null;
+  if (rect.top < topPadding) {
+    nextTop = window.scrollY + rect.top - topPadding;
+  } else if (rect.bottom > window.innerHeight - bottomPadding) {
+    nextTop = window.scrollY + rect.top - topPadding;
+  }
+  if (nextTop === null) return;
+  window.scrollTo({ top: Math.max(0, nextTop), behavior: "smooth" });
+}
+
+function scrollColdGroupSuccessCardIntoView() {
+  const card = app.querySelector("[data-cold-group-success]");
+  if (!card) return;
+  const rect = card.getBoundingClientRect();
+  const topPadding = 96;
+  const nextTop = window.scrollY + rect.top - topPadding;
+  window.scrollTo({ top: Math.max(0, nextTop), behavior: "smooth" });
+}
+
+function scrollColdObservationTailIntoView() {
+  const card = app.querySelector("[data-cold-observation-tail]");
+  if (!card) return;
+  const rect = card.getBoundingClientRect();
+  const topPadding = 96;
+  const nextTop = window.scrollY + rect.top - topPadding;
+  window.scrollTo({ top: Math.max(0, nextTop), behavior: "smooth" });
 }
 
 function tabForPage(page) {
@@ -1429,7 +1539,6 @@ const views = {
           <div class="evidence-status-list">
             ${renderPatientEvidenceStatus()}
           </div>
-          ${renderEvidenceGuidePanel()}
         </section>
         <div class="button-row">
           <button class="${progress.unlockedCount < 5 ? "primary-btn" : "soft-btn"}" data-route="inquiry">继续问诊</button>
@@ -1444,6 +1553,7 @@ const views = {
     const progress = getEvidenceProgress();
     const topic = isColdCase() ? "感冒初诊" : "失眠初诊";
     const masteredInfo = getMasteredInfoItems();
+    const viewport = getCaseState().inquiryViewport;
     return `
       <article class="page inquiry-page">
         <section class="inquiry-topbar">
@@ -1462,6 +1572,7 @@ const views = {
           ${renderDiagnosisReadyCard(progress)}
           <div id="inquiryEnd"></div>
         </section>
+        <button class="soft-btn jump-latest-btn ${viewport.showReturnLatest ? "" : "hidden"}" data-return-latest>回到最新</button>
         <section class="inquiry-composer" aria-label="模拟问诊输入">
           <input id="freeInquiryInput" class="inquiry-input" value="${escapeHTML(state.draftInquiryQuestion || "")}" placeholder="${isColdCase() ? "向虚拟病人追问..." : "向虚拟病人追问..."}">
           <button class="ghost-btn voice-btn" data-voice-inquiry>语音</button>
@@ -1792,29 +1903,81 @@ function renderColdAssessment() {
 }
 
 function renderColdObservation() {
-  const feedback = getColdFeedbackScenario();
+  const scenarioKey = getColdFeedbackScenarioKey();
+  const feedback = DATA.coldFeedbackMap[scenarioKey];
   const inquiry = getInquiryAnalysis();
   const p = getActivePatient();
+  const selections = getColdStudentSelections();
+  const caseState = getCaseState();
+  const statusMeta = getColdObservationStatusMeta(scenarioKey);
+  const visibleDayCount = Math.min(caseState.observationDay || 1, feedback.days.length);
+  const visibleDays = feedback.days.slice(0, visibleDayCount);
+  const groupDirection = isColdHerbGroupSelectionCorrect() ? "药组方向匹配" : "药组方向仍需调整";
+  const showSummary = visibleDayCount >= feedback.days.length;
   return `
     <article class="page">
       ${renderColdStageProgress("模拟服药")}
-      ${pageTitle("周同学 · 模拟服药观察", "根据证型、方剂、中药配方和中成药选择生成教学反馈")}
-      ${patientStateCard(p, "day2", "好转", "怕冷减轻，清涕减少，头痛身痛缓解。")}
+      ${pageTitle("周同学 · 模拟服药观察", "逐日观察症状变化，理解辨证与方药方向是否匹配")}
+      <section class="card patient-state-card">
+        ${patientVisual(p, "day2", "large")}
+        <div>
+          <span class="badge green">${statusMeta.badge}</span>
+          <h3>周同学状态变化</h3>
+          <p class="complaint">${statusMeta.summary}</p>
+          <p class="muted">${statusMeta.note}</p>
+        </div>
+      </section>
       <section class="card simulation-card">
-        <span class="badge green">模拟生成</span>
-        <h3>本次模拟反馈由你的辨证与方药选择生成</h3>
+        <span class="badge green">教学反馈生成</span>
+        <h3>本次模拟根据你的问诊完整度、辨证方向、治法、方剂和药组选择生成教学反馈。</h3>
         <p class="complaint">${feedback.label}</p>
-        <div class="system-tip">本次模拟依据：已纳入 ${inquiry.total} 条模拟问诊记录，命中 ${inquiry.keyHitCount} 个感冒辨证关键点；问诊完整度 ${inquiry.completenessScore} 分。</div>
+        <div class="summary-list observation-basis">
+          <div>证型方向：${selections.syndrome || "未选择"}</div>
+          <div>方剂方向：${selections.formula || "未选择"}</div>
+          <div>${groupDirection}</div>
+          <div>问诊完整度：${inquiry.completenessScore} 分，用于提示本案取证是否充分。</div>
+        </div>
       </section>
       <section class="timeline">
-        ${feedback.days.map(day => `
-          <div class="timeline-item"><section class="card"><h3>${day.day}</h3><ul class="feedback-list">${day.items.map(item => `<li>${item}</li>`).join("")}</ul><div class="system-tip">系统提示：${day.tip}</div></section></div>
+        ${visibleDays.map((day, index) => `
+          <div class="timeline-item" ${index === visibleDays.length - 1 ? `data-cold-observation-tail` : ""}>
+            <section class="card observation-day-card">
+              <h3>${day.day}</h3>
+              <div class="observation-slice">
+                <h4>症状变化</h4>
+                <ul class="feedback-list">${day.items.map(item => `<li>${item}</li>`).join("")}</ul>
+              </div>
+              <div class="observation-slice">
+                <h4>带教点评</h4>
+                <div class="coach-tip standalone">${day.tip}</div>
+              </div>
+              <div class="observation-slice">
+                <h4>${index === feedback.days.length - 1 ? "观察结论" : "下一步观察重点"}</h4>
+                <p class="complaint">${getColdObservationNextFocus(scenarioKey, index)}</p>
+              </div>
+              ${index === visibleDays.length - 1 && visibleDayCount < feedback.days.length ? `
+                <button class="primary-btn full" data-cold-observation-next>继续观察第${visibleDayCount + 1}天</button>
+              ` : ""}
+            </section>
+          </div>
         `).join("")}
       </section>
-      <div class="button-row">
-        <button class="ghost-btn" data-route="consult">申请数字名医会诊</button>
-        <button class="primary-btn" data-route="review">查看复盘</button>
-      </div>
+      ${showSummary ? `
+        <section class="card learning-card">
+          <div class="section-head compact">
+            <h2>本次模拟观察结论</h2>
+            <span class="tiny-pill">进入复盘前</span>
+          </div>
+          <p class="complaint">${getColdObservationSummary(scenarioKey)}</p>
+          ${caseState.showTeacherComment ? `
+            <div class="coach-tip standalone teacher-comment-card">你本次的辨证路径基本顺畅：先取证，再辨证，再定治法，再选方药。下一步要注意，不要只看一个症状定证，要看症状组合和变化趋势。</div>
+          ` : ""}
+          <div class="button-row">
+            <button class="ghost-btn" data-cold-teacher-comment>${caseState.showTeacherComment ? "收起老师点评" : "请老师点评"}</button>
+            <button class="primary-btn" data-route="review">进入病案复盘</button>
+          </div>
+        </section>
+      ` : ""}
     </article>
   `;
 }
@@ -2047,44 +2210,51 @@ function getDiagnosisGuardMessage() {
 }
 
 function renderPatientEvidenceStatus() {
-  return getEvidenceStatusEntries().map(item => item.unlocked
-    ? `
-      <div class="evidence-status-item unlocked">
-        <div class="evidence-status-head">
-          <span class="evidence-status-label">${item.label}</span>
-          <strong class="evidence-status-flag">✓ 已获得</strong>
-        </div>
-        <p class="evidence-status-finding">${item.finding}</p>
+  return getEvidenceStatusEntries().map(item => {
+    const isActive = state.activeEvidenceGuide === item.label;
+    return `
+      <div class="evidence-status-block ${isActive ? "active" : ""}">
+        ${item.unlocked
+          ? `
+            <button type="button" class="evidence-status-item evidence-entry-btn unlocked ${isActive ? "active" : ""}" data-evidence-entry="${item.label}">
+              <div class="evidence-status-head">
+                <span class="evidence-status-label">${item.label}</span>
+                <strong class="evidence-status-flag">✓ 已获得</strong>
+              </div>
+              <p class="evidence-status-finding">${item.finding}</p>
+            </button>
+          `
+          : `
+            <button type="button" class="evidence-status-item evidence-entry-btn ${isActive ? "active" : ""}" data-evidence-entry="${item.label}">
+              <div class="evidence-status-head">
+                <span class="evidence-status-label">${item.label}</span>
+                <strong class="evidence-status-flag"><span class="evidence-lock-icon" aria-hidden="true">🔒</span>${getEvidenceLockedStatusText(item.locked)}</strong>
+              </div>
+            </button>
+          `}
+        ${isActive ? renderEvidenceGuidePanel(item) : ""}
       </div>
-    `
-    : `
-      <button type="button" class="evidence-status-item evidence-entry-btn ${state.activeEvidenceGuide === item.label ? "active" : ""}" data-evidence-entry="${item.label}">
-        <div class="evidence-status-head">
-          <span class="evidence-status-label">${item.label}</span>
-          <strong class="evidence-status-flag"><span class="evidence-lock-icon" aria-hidden="true">🔒</span>${getEvidenceLockedStatusText(item.locked)}</strong>
-        </div>
-      </button>
-    `
-  ).join("");
+    `;
+  }).join("");
 }
 
-function renderEvidenceGuidePanel() {
-  const label = state.activeEvidenceGuide;
-  if (!label) return "";
-  const hint = findHintForEvidenceLabel(label);
+function renderEvidenceGuidePanel(item) {
+  const hint = findHintForEvidenceLabel(item.label);
+  const isUnlocked = item.unlocked;
   return `
-    <section class="evidence-guide-panel">
-      <div class="section-head compact evidence-guide-head">
-        <div>
-          <h3>${label}</h3>
-          <p class="muted">先听带教提醒，再带着这个方向继续问诊。</p>
-        </div>
+    <section class="evidence-guide-panel inline ${isUnlocked ? "unlocked" : ""}">
+      <div class="evidence-guide-inline-head">
+        <span class="tiny-pill">${isUnlocked ? "已获得证据解释" : "带教提醒"}</span>
         <button type="button" class="ghost-btn evidence-guide-close" data-close-evidence-guide>收起</button>
       </div>
-      <p class="evidence-guide-copy">${getEntryTipForLabel(label)}</p>
-      <div class="button-row evidence-guide-actions">
-        <button type="button" class="soft-btn" data-evidence-ask="${label}">${hint?.actionLabel || "去问这个问题"}</button>
-      </div>
+      <p class="evidence-guide-inline-label">${item.label}</p>
+      ${isUnlocked ? "" : `<p class="muted evidence-guide-intro">先听带教提醒，再带着这个方向继续问诊。</p>`}
+      <p class="evidence-guide-copy">${isUnlocked ? getUnlockedEvidenceExplanation(item.label, item.finding) : getEntryTipForLabel(item.label)}</p>
+      ${isUnlocked ? "" : `
+        <div class="button-row evidence-guide-actions">
+          <button type="button" class="soft-btn full" data-evidence-ask="${item.label}">${hint?.actionLabel || "去问这个问题"}</button>
+        </div>
+      `}
     </section>
   `;
 }
@@ -2105,6 +2275,32 @@ function renderEntryStatusCard() {
 
 function getEntryTipForLabel(label) {
   return getPatientDetailView().entryTips?.[label] || "先围绕这条线索继续取证，再把它和其他证据合起来看。";
+}
+
+function getUnlockedEvidenceExplanation(label, finding) {
+  const caseSpecific = {
+    zhou: {
+      "寒热轻重": "恶寒明显、发热较轻，说明寒象更突出。单独这一条还不能定证，但它和无汗、清涕、苔薄白、脉浮紧合在一起，就更支持风寒束表。",
+      "汗出情况": "无汗说明表邪更像把腠理闭住了。它本身不能单独定证，但和恶寒明显、身痛、脉浮紧一起看，更支持风寒束表。",
+      "鼻涕性质": "清稀鼻涕更偏寒象。它和咽痛不重、痰白清稀这些信息放在一起，比单独看更有辨证价值。",
+      "痰的性质": "白稀痰更偏寒，不像热证那样黄稠黏滞。它是在帮你把风热、痰热这些方向往后放。",
+      "咽喉情况": "咽部只有轻微不适、没有明显红肿疼痛，说明热象并不突出。这条证据更像在帮助你排除典型风热路径。",
+      "舌象": "舌淡红、苔薄白说明热象不重，也没有明显湿热黏腻的样子。舌象要和主诉、寒热、痰涕合起来看。",
+      "脉象": "脉浮紧是风寒束表的重要辅助证据。它本身不是单独答案，但和恶寒、无汗、清涕放在一起，方向会更清晰。"
+    },
+    lin: {
+      "病程长短": "病程已持续半年，说明这不是短期波动，但病久不等于某一个固定证型，还要结合情绪、月经、舌脉一起看。",
+      "胸胁情况": "经前胸胁胀满提示气机郁滞更值得重视。它和叹气、情绪波动放在一起，更能支持肝郁主线。",
+      "月经情况": "经前情绪和乳房变化会把肝郁线索拉得更清楚。它不是单独答案，但能帮助你把睡眠问题和肝气疏泄联系起来。",
+      "心悸健忘": "心悸健忘这条线索更像是在帮你判断有没有兼证。它不能单独定证，但能提醒你别漏掉心脾不足一类可能。",
+      "饮食二便": "饮食和二便是在帮你判断脾胃有没有明显参与。单独看不决定主线，但能帮你避免把兼证漏掉。",
+      "寒热汗出": "潮热盗汗这一类信息主要是在判断热象强不强。没有明显热象时，就别急着往阴虚火旺那条路走。",
+      "痰胸情况": "痰多胸闷如果不突出，就说明痰热主线还不够硬。这条证据更多是在帮你排除，而不是直接下结论。",
+      "舌象": "舌淡红、苔薄白说明热象不重，也看不出明显痰热壅盛。舌象要和睡眠、情绪、胸胁这些线索一起看。",
+      "脉象": "脉弦常把思路往肝郁、气机不舒那边带，但也不要单靠一条脉象定证，还是要和情绪、经前变化一起拼起来。"
+    }
+  };
+  return caseSpecific[state.activeCaseId]?.[label] || `${finding}。这条证据已经拿到了，但不要急着单独下结论，先把它和其他线索合起来看。`;
 }
 
 function getEvidenceLockedStatusText(status) {
@@ -2257,6 +2453,10 @@ function isColdHerbGroupSelectionCorrect(selectedGroups = state.coldGroupSelecti
     && !selectedGroups.includes("damp-yin");
 }
 
+function isColdGroupReviewMode() {
+  return state.coldGroupReviewMode && state.coldGroupSubmitted && isColdHerbGroupSelectionCorrect();
+}
+
 function canEnterColdObservation() {
   return isColdCorrectSyndrome()
     && isColdCorrectMethod()
@@ -2368,32 +2568,49 @@ function renderColdHerbLearningStage() {
   const submitted = state.coldGroupSubmitted;
   const feedback = submitted ? getColdHerbGroupFeedback(selectedGroups) : "";
   const groupsCorrect = submitted && isColdHerbGroupSelectionCorrect(selectedGroups);
+  const reviewMode = isColdGroupReviewMode();
+  const submitLabel = submitted ? "继续补选后提交" : "提交药组判断";
   return `
     <section class="card learning-card">
       <div class="form-group">
         <h3>本案需要哪些药组共同组成方义？可多选。</h3>
         <div class="group-judge-list">
           ${groups.map(group => `
-            <button type="button" class="group-judge-card ${selectedGroups.includes(group.id) ? "selected" : ""}" data-cold-group="${group.id}">
-              <div class="group-judge-head">
-                <strong>${group.title}</strong>
-                <span>${selectedGroups.includes(group.id) ? "已选择" : "点击判断"}</span>
-              </div>
-              <p>${group.herbs.join("、")}</p>
-              <small>${group.summary}</small>
-            </button>
+            ${reviewMode
+              ? `
+                <div class="group-judge-card review ${selectedGroups.includes(group.id) ? "selected" : "dimmed"}">
+                  <div class="group-judge-head">
+                    <strong>${group.title}</strong>
+                    <span>${selectedGroups.includes(group.id) ? "已纳入本案" : "暂不作为主线"}</span>
+                  </div>
+                  <p>${group.herbs.join("、")}</p>
+                  <small>${group.summary}</small>
+                </div>
+              `
+              : `
+                <button type="button" class="group-judge-card ${selectedGroups.includes(group.id) ? "selected" : ""}" data-cold-group="${group.id}">
+                  <div class="group-judge-head">
+                    <strong>${group.title}</strong>
+                    <span>${selectedGroups.includes(group.id) ? "已选择" : "点击判断"}</span>
+                  </div>
+                  <p>${group.herbs.join("、")}</p>
+                  <small>${group.summary}</small>
+                </button>
+              `}
           `).join("")}
         </div>
       </div>
-      <div class="button-row">
-        <button class="ghost-btn" data-cold-step="2">返回上一关</button>
-        <button class="primary-btn" data-cold-submit-groups ${selectedGroups.length ? "" : "disabled"}>提交药组判断</button>
-      </div>
-      ${feedback ? `<div class="coach-tip standalone">${feedback}</div>` : ""}
+      ${reviewMode ? "" : `
+        <div class="button-row">
+          <button class="ghost-btn" data-cold-step="2">返回上一关</button>
+          <button class="primary-btn" data-cold-submit-groups ${selectedGroups.length ? "" : "disabled"}>${submitLabel}</button>
+        </div>
+      `}
+      ${submitted && !groupsCorrect ? `<div class="coach-tip standalone">${feedback}</div>` : ""}
       ${submitted && !groupsCorrect ? `<button class="ghost-btn full" data-cold-reset-groups>重新判断药组</button>` : ""}
     </section>
-    ${groupsCorrect ? `
-      <section class="card learning-card">
+    ${reviewMode ? `
+      <section class="card learning-card" data-cold-group-success>
         <div class="section-head compact">
           <h2>这一关判断已经走顺了</h2>
           <span class="tiny-pill">药组结构已形成</span>
@@ -2406,6 +2623,7 @@ function renderColdHerbLearningStage() {
         </div>
         <p class="muted">接下来不要急着背药名，先看看每组药在方中负责什么任务。</p>
         <button class="primary-btn full" data-cold-open-meaning>查看方义拆解</button>
+        <button class="ghost-btn full" data-cold-edit-groups>修改药组判断</button>
       </section>
     ` : ""}
   `;
@@ -2622,6 +2840,7 @@ function resetColdLearningFrom(stage) {
   if (stage <= 3) {
     state.coldGroupSelections = [];
     state.coldGroupSubmitted = false;
+    state.coldGroupReviewMode = false;
     state.coldExpandedHerbPanels = [];
     state.coldShowFormulaPathCard = false;
     state.coldMeaningViewed = false;
@@ -2716,6 +2935,7 @@ function setActiveCase(caseId) {
   state.coldLearningStep = 1;
   state.coldGroupSelections = [];
   state.coldGroupSubmitted = false;
+  state.coldGroupReviewMode = false;
   state.coldExpandedHerbPanels = [];
   state.coldShowSyndromePathCard = false;
   state.coldShowFormulaPathCard = false;
@@ -2730,10 +2950,14 @@ function getActivePatient() {
   return DATA.patients.find(patient => patient.id === state.activeCaseId) || DATA.patients[0];
 }
 
+function getCaseStateById(caseId) {
+  if (!state.caseStates[caseId]) state.caseStates[caseId] = createCaseState();
+  ensureCaseStateShape(state.caseStates[caseId]);
+  return state.caseStates[caseId];
+}
+
 function getCaseState() {
-  if (!state.caseStates[state.activeCaseId]) state.caseStates[state.activeCaseId] = createCaseState();
-  ensureCaseStateShape(state.caseStates[state.activeCaseId]);
-  return state.caseStates[state.activeCaseId];
+  return getCaseStateById(state.activeCaseId);
 }
 
 function getActiveQuestions() {
@@ -2785,7 +3009,24 @@ function createCaseState() {
     unlockedInfo: [],
     unlockedEvidence: {},
     hintProgress: {},
-    nextRecordId: 1
+    nextRecordId: 1,
+    observationDay: 1,
+    showTeacherComment: false,
+    inquiryFlow: {
+      queue: [],
+      activeRecordId: "",
+      pendingJudgeRecordId: "",
+      running: false,
+      runToken: 0
+    },
+    inquiryViewport: {
+      currentTurnId: "",
+      lockedTurnId: "",
+      lastScrollTop: 0,
+      autoFollow: true,
+      showReturnLatest: false,
+      programmaticScrollingUntil: 0
+    }
   };
 }
 
@@ -2795,6 +3036,34 @@ function ensureCaseStateShape(caseState) {
   caseState.unlockedEvidence = caseState.unlockedEvidence || {};
   caseState.hintProgress = caseState.hintProgress || {};
   caseState.nextRecordId = caseState.nextRecordId || 1;
+  caseState.observationDay = caseState.observationDay || 1;
+  caseState.showTeacherComment = Boolean(caseState.showTeacherComment);
+  caseState.inquiryFlow = caseState.inquiryFlow || {
+    queue: [],
+    activeRecordId: "",
+    pendingJudgeRecordId: "",
+    running: false,
+    runToken: 0
+  };
+  caseState.inquiryFlow.queue = caseState.inquiryFlow.queue || [];
+  caseState.inquiryFlow.activeRecordId = caseState.inquiryFlow.activeRecordId || "";
+  caseState.inquiryFlow.pendingJudgeRecordId = caseState.inquiryFlow.pendingJudgeRecordId || "";
+  caseState.inquiryFlow.running = Boolean(caseState.inquiryFlow.running);
+  caseState.inquiryFlow.runToken = caseState.inquiryFlow.runToken || 0;
+  caseState.inquiryViewport = caseState.inquiryViewport || {
+    currentTurnId: "",
+    lockedTurnId: "",
+    lastScrollTop: 0,
+    autoFollow: true,
+    showReturnLatest: false,
+    programmaticScrollingUntil: 0
+  };
+  caseState.inquiryViewport.currentTurnId = caseState.inquiryViewport.currentTurnId || "";
+  caseState.inquiryViewport.lockedTurnId = caseState.inquiryViewport.lockedTurnId || "";
+  caseState.inquiryViewport.lastScrollTop = caseState.inquiryViewport.lastScrollTop || 0;
+  caseState.inquiryViewport.autoFollow = caseState.inquiryViewport.autoFollow !== false;
+  caseState.inquiryViewport.showReturnLatest = Boolean(caseState.inquiryViewport.showReturnLatest);
+  caseState.inquiryViewport.programmaticScrollingUntil = caseState.inquiryViewport.programmaticScrollingUntil || 0;
 }
 
 function getColdInquiryAnalysis() {
@@ -2850,36 +3119,86 @@ function renderInquiryRecords(interactive = true) {
   return `
     <div class="chat-records">
       ${records.map(record => `
-        <div class="chat-pair">
+        <div class="chat-pair" data-turn-id="${record.turnId || record.id}">
           <div class="bubble-row student">
             <div class="bubble dark"><span>你</span>${escapeHTML(record.question)}</div>
           </div>
-          ${record.speaker === "system"
-            ? `<div class="coach-tip observation-tip"><strong>系统观察</strong>${escapeHTML(record.answer)}</div>`
-            : `<div class="bubble-row patient"><div class="bubble light"><span>${patientName}</span>${escapeHTML(record.answer)}</div></div>`}
-          ${record.unlockedFinding ? `<div class="evidence-chip-row"><span class="evidence-chip">${escapeHTML(getUnlockedChipLabel(record))}</span></div>` : ""}
-          ${interactive && record.judgement && !record.judgement.choice ? renderEvidenceJudgeCard(record) : ""}
-          ${record.coachTip ? `<div class="coach-tip">${escapeHTML(record.coachTip)}</div>` : ""}
+          ${renderInquiryReplyBlock(record, patientName)}
+          ${renderInquiryTeachingBlock(record)}
+          ${interactive && record.judgement && !record.judgement.choice && hasReachedInquiryStage(record, "quiz") ? renderEvidenceJudgeCard(record) : ""}
+          ${record.coachTip && record.judgement?.choice ? `<div class="coach-tip">${escapeHTML(record.coachTip)}</div>` : ""}
         </div>
       `).join("")}
     </div>
   `;
 }
 
-function getUnlockedChipLabel(record) {
-  if (!record?.unlockedFinding) return "";
-  const orderedLabels = getActiveEvidencePlan().map(item => item.label);
-  if (orderedLabels.includes(record.unlockedInfo)) return `已解锁证据：${record.unlockedFinding}`;
-  return `补充线索：${record.unlockedFinding}`;
+function renderInquiryReplyBlock(record, patientName) {
+  const stage = getInquiryRecordStage(record);
+  if (stage === "typing") {
+    return renderTypingBubble(record, patientName);
+  }
+  if (!hasReachedInquiryStage(record, "reply")) return "";
+  if (record.speaker === "system") {
+    return `<div class="coach-tip observation-tip ${stage === "reply" ? "message-enter" : ""}"><strong>系统观察</strong>${escapeHTML(record.answer)}</div>`;
+  }
+  return `<div class="bubble-row patient"><div class="bubble light ${stage === "reply" ? "message-enter" : ""}"><span>${patientName}</span>${escapeHTML(record.answer)}</div></div>`;
+}
+
+function renderTypingBubble(record, patientName) {
+  const title = record.speaker === "system" ? "系统观察" : patientName;
+  const text = record.speaker === "system" ? "正在观察..." : "正在回复...";
+  return `
+    <div class="bubble-row patient">
+      <div class="bubble light typing-bubble message-enter">
+        <span>${title}</span>
+        <div class="typing-line">
+          <em>${text}</em>
+          <div class="typing-dots" aria-label="${text}">
+            <i></i><i></i><i></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderInquiryTeachingBlock(record) {
+  if (!hasReachedInquiryStage(record, "teaching")) return "";
+  if (record.unlockedFinding) {
+    const guidingText = record.judgement?.choice
+      ? "这条证据已经放进你的辨证线索里，接下来继续和其他证据一起看。"
+      : "先别急着定证，先判断它更支持哪一边。";
+    return `
+      <section class="ai-teaching-card ${getInquiryRecordStage(record) === "teaching" ? "message-enter" : ""}">
+        <span class="badge green">AI带教</span>
+        <p class="ai-teaching-copy">你获得了一条新的辨证证据：</p>
+        <strong class="ai-teaching-evidence">${escapeHTML(record.unlockedFinding)}</strong>
+        <p class="ai-teaching-copy">${guidingText}</p>
+      </section>
+    `;
+  }
+  if (record.coachTip) {
+    return `
+      <section class="ai-teaching-card ${getInquiryRecordStage(record) === "teaching" ? "message-enter" : ""}">
+        <span class="badge green">AI带教</span>
+        <p class="ai-teaching-copy">${escapeHTML(record.coachTip)}</p>
+      </section>
+    `;
+  }
+  return "";
 }
 
 function renderEvidenceJudgeCard(record) {
+  const visibleCount = typeof record?.messageFlow?.visibleOptions === "number"
+    ? record.messageFlow.visibleOptions
+    : record.judgement.options.length;
   return `
-    <section class="evidence-judge-card">
+    <section class="evidence-judge-card ${["quiz", "wait-choice"].includes(getInquiryRecordStage(record)) ? "message-enter" : ""}">
       <p>${record.judgement.prompt}</p>
       <div class="judge-option-grid">
-        ${record.judgement.options.map(option => `
-          <button class="ghost-btn judge-option-btn" data-judge-record="${record.id}" data-judge-option="${option.id}">
+        ${record.judgement.options.slice(0, visibleCount).map((option, index) => `
+          <button class="ghost-btn judge-option-btn ${getInquiryRecordStage(record) === "quiz" ? "option-enter" : ""}" style="${getInquiryRecordStage(record) === "quiz" ? `animation-delay:${index * 100}ms;` : ""}" data-judge-record="${record.id}" data-judge-option="${option.id}">
             <span>${option.id}.</span>${option.label}
           </button>
         `).join("")}
@@ -3016,6 +3335,11 @@ function bindPageActions() {
       if (el.dataset.route === "diagnosis" && isColdCase() && state.page !== "diagnosis") {
         state.coldLearningStep = 1;
       }
+      if (el.dataset.route === "observation" && isColdCase() && !["consult", "observation"].includes(state.page)) {
+        const caseState = getCaseState();
+        caseState.observationDay = 1;
+        caseState.showTeacherComment = false;
+      }
       showStageToast(el.dataset.route);
       render(el.dataset.route);
     });
@@ -3027,8 +3351,14 @@ function bindPageActions() {
 
   app.querySelectorAll("[data-evidence-entry]").forEach(button => {
     button.addEventListener("click", () => {
-      state.activeEvidenceGuide = button.dataset.evidenceEntry || "";
+      const label = button.dataset.evidenceEntry || "";
+      state.activeEvidenceGuide = state.activeEvidenceGuide === label ? "" : label;
       render("patient", { preserveScroll: true, noPageMotion: true });
+      if (state.activeEvidenceGuide) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(scrollActiveEvidenceGuideIntoView);
+        });
+      }
     });
   });
 
@@ -3072,11 +3402,9 @@ function bindPageActions() {
         showToast("这个方向你已经补到过了。");
         return;
       }
-      const unlockedInfo = addInquiryRecord(hint.actionQuestion, matchPatientAnswer(hint.actionQuestion, hint.key), "hint");
-      if (unlockedInfo?.label) state.pendingUnlockCue = { label: unlockedInfo.label };
       state.showAiPrompts = false;
       state.draftInquiryQuestion = "";
-      render("inquiry", { scrollInquiryBottom: true, noPageMotion: true });
+      queueInquiryQuestion(hint.actionQuestion, "hint", hint.key);
     });
   });
 
@@ -3089,13 +3417,14 @@ function bindPageActions() {
         return;
       }
       state.draftInquiryQuestion = "";
-      const unlockedInfo = addInquiryRecord(question, matchPatientAnswer(question), "free");
-      if (unlockedInfo?.label) state.pendingUnlockCue = { label: unlockedInfo.label };
-      render("inquiry", { scrollInquiryBottom: true, noPageMotion: true });
+      queueInquiryQuestion(question, "free");
     });
   });
 
   app.querySelectorAll("#freeInquiryInput").forEach(input => {
+    input.addEventListener("input", () => {
+      state.draftInquiryQuestion = input.value;
+    });
     input.addEventListener("keydown", event => {
       if (event.key !== "Enter") return;
       event.preventDefault();
@@ -3157,7 +3486,36 @@ function bindPageActions() {
       const choice = button.dataset.judgeOption;
       record.judgement.choice = choice;
       record.coachTip = record.judgement.feedback?.[choice] || "";
-      render("inquiry", { scrollInquiryBottom: true, noPageMotion: true });
+      if (record.messageFlow) {
+        record.messageFlow.status = "finished";
+        record.messageFlow.visibleOptions = record.judgement.options.length;
+      }
+      const flowState = getInquiryFlowState();
+      if (flowState.pendingJudgeRecordId === record.id) {
+        flowState.pendingJudgeRecordId = "";
+      }
+      render("inquiry", {
+        noPageMotion: true,
+        focusInquiryInput: true,
+        inquiryScrollAction: "turn-keep-latest",
+        turnId: record.turnId || record.id
+      });
+      startInquiryFlowProcessor(state.activeCaseId);
+    });
+  });
+
+  app.querySelectorAll("[data-return-latest]").forEach(button => {
+    button.addEventListener("click", () => {
+      const viewport = getCaseState().inquiryViewport;
+      viewport.autoFollow = true;
+      viewport.showReturnLatest = false;
+      render("inquiry", {
+        noPageMotion: true,
+        focusInquiryInput: true,
+        inquiryScrollAction: "turn-start",
+        turnId: viewport.lockedTurnId || viewport.currentTurnId,
+        scrollBehavior: "smooth"
+      });
     });
   });
 
@@ -3280,6 +3638,7 @@ function bindPageActions() {
         ? state.coldGroupSelections.filter(item => item !== groupId)
         : [...state.coldGroupSelections, groupId];
       state.coldGroupSubmitted = false;
+      state.coldGroupReviewMode = false;
       state.coldExpandedHerbPanels = [];
       state.coldMeaningViewed = false;
       state.coldSelections["中药配方选择"].selected = getColdGroupHerbSelection(state.coldGroupSelections);
@@ -3294,9 +3653,15 @@ function bindPageActions() {
         return;
       }
       state.coldGroupSubmitted = true;
+      state.coldGroupReviewMode = isColdHerbGroupSelectionCorrect();
       state.coldExpandedHerbPanels = [];
       state.coldMeaningViewed = false;
       render("diagnosis", { preserveScroll: true, noPageMotion: true });
+      if (state.coldGroupReviewMode) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(scrollColdGroupSuccessCardIntoView);
+        });
+      }
     });
   });
 
@@ -3304,9 +3669,19 @@ function bindPageActions() {
     button.addEventListener("click", () => {
       state.coldGroupSelections = [];
       state.coldGroupSubmitted = false;
+      state.coldGroupReviewMode = false;
       state.coldExpandedHerbPanels = [];
       state.coldMeaningViewed = false;
       state.coldSelections["中药配方选择"].selected = [];
+      render("diagnosis", { preserveScroll: true, noPageMotion: true });
+    });
+  });
+
+  app.querySelectorAll("[data-cold-edit-groups]").forEach(button => {
+    button.addEventListener("click", () => {
+      state.coldGroupSubmitted = false;
+      state.coldGroupReviewMode = false;
+      state.coldMeaningViewed = false;
       render("diagnosis", { preserveScroll: true, noPageMotion: true });
     });
   });
@@ -3318,6 +3693,26 @@ function bindPageActions() {
       state.coldMeaningViewed = true;
       state.coldExpandedHerbPanels = ["wind-cold"];
       render("diagnosis");
+    });
+  });
+
+  app.querySelectorAll("[data-cold-observation-next]").forEach(button => {
+    button.addEventListener("click", () => {
+      const caseState = getCaseState();
+      const maxDays = getColdFeedbackScenario().days.length;
+      caseState.observationDay = Math.min(maxDays, (caseState.observationDay || 1) + 1);
+      render("observation", { preserveScroll: true, noPageMotion: true });
+      requestAnimationFrame(() => {
+        requestAnimationFrame(scrollColdObservationTailIntoView);
+      });
+    });
+  });
+
+  app.querySelectorAll("[data-cold-teacher-comment]").forEach(button => {
+    button.addEventListener("click", () => {
+      const caseState = getCaseState();
+      caseState.showTeacherComment = !caseState.showTeacherComment;
+      render("observation", { preserveScroll: true, noPageMotion: true });
     });
   });
 
@@ -3459,15 +3854,131 @@ function playInfoUnlockTone() {
   }
 }
 
-function scrollInquiryToBottom() {
-  setTimeout(() => {
-    const thread = document.querySelector("#inquiryThread");
-    if (thread) {
-      thread.scrollTo({ top: thread.scrollHeight, behavior: "smooth" });
+function focusInquiryInput() {
+  const input = document.querySelector("#freeInquiryInput");
+  if (!input) return;
+  input.focus({ preventScroll: true });
+  const length = input.value.length;
+  input.setSelectionRange(length, length);
+}
+
+function bindInquiryThreadScroll(thread = document.querySelector("#inquiryThread")) {
+  if (!thread || thread.dataset.boundScroll === "true") return;
+  thread.dataset.boundScroll = "true";
+  thread.addEventListener("scroll", () => {
+    const caseState = getCaseState();
+    const viewport = caseState.inquiryViewport;
+    const flowState = caseState.inquiryFlow;
+    const now = Date.now();
+    const previousTop = viewport.lastScrollTop || 0;
+    viewport.lastScrollTop = thread.scrollTop;
+    if (now < (viewport.programmaticScrollingUntil || 0)) {
       return;
     }
-    document.querySelector("#inquiryEnd")?.scrollIntoView({ behavior: "smooth", block: "end" });
-  }, 60);
+    const movedUp = thread.scrollTop < previousTop - 12;
+    const distanceFromBottom = thread.scrollHeight - thread.clientHeight - thread.scrollTop;
+    if (flowState.running) {
+      if (distanceFromBottom <= 160) {
+        viewport.autoFollow = true;
+        viewport.showReturnLatest = false;
+        syncInquiryReturnLatestButton();
+        return;
+      }
+      if (movedUp && distanceFromBottom > 160) {
+        viewport.autoFollow = false;
+        viewport.showReturnLatest = true;
+        syncInquiryReturnLatestButton();
+      }
+      return;
+    }
+    viewport.autoFollow = distanceFromBottom <= 160;
+    viewport.showReturnLatest = !viewport.autoFollow;
+    syncInquiryReturnLatestButton();
+  });
+}
+
+function scrollInquiryToBottom() {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const thread = document.querySelector("#inquiryThread");
+      if (thread) {
+        thread.scrollTo({ top: thread.scrollHeight, behavior: "smooth" });
+        return;
+      }
+      document.querySelector("#inquiryEnd")?.scrollIntoView({ behavior: "smooth", block: "end" });
+    });
+  });
+}
+
+function getInquiryTurnPair(turnId) {
+  if (!turnId) return null;
+  return document.querySelector(`.chat-pair[data-turn-id="${turnId}"]`);
+}
+
+function getInquiryViewportMetrics(thread = document.querySelector("#inquiryThread")) {
+  const composer = document.querySelector(".inquiry-composer");
+  return {
+    thread,
+    composerHeight: composer?.offsetHeight || 0,
+    safeBottom: 16,
+    anchorRatio: 0.24
+  };
+}
+
+function scrollInquiryToTurnStart(turnId, behavior = "smooth") {
+  const pair = getInquiryTurnPair(turnId);
+  const metrics = getInquiryViewportMetrics();
+  if (!pair || !metrics.thread) return;
+  const targetTop = Math.max(0, pair.offsetTop - metrics.thread.clientHeight * metrics.anchorRatio);
+  markInquiryProgrammaticScroll(behavior === "smooth" ? 420 : 220);
+  metrics.thread.scrollTo({ top: targetTop, behavior });
+  const viewport = getCaseState().inquiryViewport;
+  viewport.currentTurnId = turnId;
+  viewport.lockedTurnId = turnId;
+  viewport.lastScrollTop = targetTop;
+  viewport.autoFollow = true;
+  viewport.showReturnLatest = false;
+  syncInquiryReturnLatestButton();
+}
+
+function ensureInquiryTurnVisible(turnId, behavior = "auto") {
+  const pair = getInquiryTurnPair(turnId);
+  const metrics = getInquiryViewportMetrics();
+  const viewport = getCaseState().inquiryViewport;
+  if (!pair || !metrics.thread || !viewport.autoFollow) return;
+
+  const currentTop = metrics.thread.scrollTop;
+  const visibleTop = currentTop;
+  const visibleBottom = currentTop + metrics.thread.clientHeight - metrics.composerHeight - metrics.safeBottom;
+  const pairTop = pair.offsetTop;
+  const pairBottom = pair.offsetTop + pair.offsetHeight;
+  if (pairTop < visibleTop + 20) {
+    viewport.lastScrollTop = currentTop;
+    return;
+  }
+  const overflow = pairBottom - visibleBottom;
+  if (overflow <= 0) {
+    viewport.lastScrollTop = currentTop;
+    return;
+  }
+
+  const maxTargetTop = Math.max(currentTop, pairTop - metrics.thread.clientHeight * 0.2);
+  const targetTop = Math.min(currentTop + overflow + 12, maxTargetTop);
+  if (targetTop <= currentTop) return;
+  markInquiryProgrammaticScroll(behavior === "smooth" ? 420 : 240);
+  metrics.thread.scrollTo({ top: targetTop, behavior });
+  viewport.lastScrollTop = targetTop;
+}
+
+function markInquiryProgrammaticScroll(duration = 300) {
+  const viewport = getCaseState().inquiryViewport;
+  viewport.programmaticScrollingUntil = Date.now() + duration;
+}
+
+function syncInquiryReturnLatestButton() {
+  const button = document.querySelector("[data-return-latest]");
+  if (!button) return;
+  button.classList.toggle("hidden", !getCaseState().inquiryViewport.showReturnLatest);
 }
 
 function showStageToast(route) {
@@ -3500,6 +4011,7 @@ function addInquiryRecord(question, result, source) {
   const unlockedInfo = unlockInfoByKey(result.key);
   const record = {
     id: `record-${state.activeCaseId}-${caseState.nextRecordId++}`,
+    turnId: "",
     question,
     answer: result.answer,
     matchedKey: result.key,
@@ -3508,11 +4020,220 @@ function addInquiryRecord(question, result, source) {
     speaker: result.speaker || "patient",
     unlockedInfo: unlockedInfo.category || "",
     unlockedFinding: unlockedInfo.isNew ? unlockedInfo.finding : "",
+    unlockCueLabel: unlockedInfo.label || "",
     judgement: unlockedInfo.isNew && unlockedInfo.judge ? JSON.parse(JSON.stringify(unlockedInfo.judge)) : null,
-    coachTip: unlockedInfo.isNew && unlockedInfo.judge ? "" : getInquiryCoachTip(result)
+    coachTip: unlockedInfo.isNew && unlockedInfo.judge ? "" : getInquiryCoachTip(result),
+    messageFlow: {
+      status: "waiting",
+      visibleOptions: 0
+    }
   };
+  record.turnId = record.id;
   caseState.inquiryRecords.push(record);
-  return unlockedInfo;
+  return record;
+}
+
+function getInquiryFlowState(caseId = state.activeCaseId) {
+  return getCaseStateById(caseId).inquiryFlow;
+}
+
+function getInquiryRecordById(recordId, caseId = state.activeCaseId) {
+  return getCaseStateById(caseId).inquiryRecords.find(item => item.id === recordId) || null;
+}
+
+function getInquiryRecordStage(record) {
+  return record?.messageFlow?.status || "finished";
+}
+
+function hasReachedInquiryStage(record, stage) {
+  return (INQUIRY_FLOW_STAGE_ORDER[getInquiryRecordStage(record)] || 0) >= (INQUIRY_FLOW_STAGE_ORDER[stage] || 0);
+}
+
+function updateInquiryRecordFlow(recordId, nextStatus, extra = {}, caseId = state.activeCaseId) {
+  const record = getInquiryRecordById(recordId, caseId);
+  if (!record) return null;
+  record.messageFlow = {
+    ...(record.messageFlow || { visibleOptions: 0 }),
+    status: nextStatus,
+    ...extra
+  };
+  return record;
+}
+
+function queueInquiryQuestion(question, source = "free", preferredKey = "") {
+  const result = matchPatientAnswer(question, preferredKey);
+  const record = addInquiryRecord(question, result, source);
+  const flowState = getInquiryFlowState();
+  const viewport = getCaseState().inquiryViewport;
+  if (flowState.pendingJudgeRecordId) {
+    flowState.pendingJudgeRecordId = "";
+  }
+  viewport.currentTurnId = record.turnId;
+  viewport.lockedTurnId = record.turnId;
+  viewport.autoFollow = true;
+  viewport.showReturnLatest = false;
+  flowState.queue.push(record.id);
+  scheduleInquiryRender(state.activeCaseId, {
+    focusInquiryInput: true,
+    inquiryScrollAction: "turn-start",
+    turnId: record.turnId,
+    scrollBehavior: "smooth"
+  });
+  startInquiryFlowProcessor(state.activeCaseId);
+}
+
+async function startInquiryFlowProcessor(caseId = state.activeCaseId) {
+  const flowState = getInquiryFlowState(caseId);
+  if (flowState.running) return;
+  flowState.running = true;
+  const runToken = ++flowState.runToken;
+
+  while (flowState.queue.length) {
+    if (!isInquiryFlowRunAlive(caseId, runToken)) break;
+    const recordId = flowState.queue.shift();
+    flowState.activeRecordId = recordId;
+    const outcome = await playInquiryRecordFlow(caseId, recordId, runToken);
+    flowState.activeRecordId = "";
+    if (outcome === "wait-choice") {
+      flowState.pendingJudgeRecordId = recordId;
+      continue;
+    }
+  }
+
+  flowState.running = false;
+}
+
+async function playInquiryRecordFlow(caseId, recordId, runToken) {
+  const turnId = getInquiryRecordById(recordId, caseId)?.turnId || recordId;
+  if (!(await waitInquiryFlowStep(caseId, runToken, randBetween(820, 1120)))) return "stopped";
+  updateInquiryRecordFlow(recordId, "typing", { visibleOptions: 0 }, caseId);
+  scheduleInquiryRender(caseId, {
+    focusInquiryInput: true,
+    preserveThreadScroll: true,
+    turnId
+  });
+
+  if (!(await waitInquiryFlowStep(caseId, runToken, randBetween(650, 980)))) return "stopped";
+  const replyRecord = updateInquiryRecordFlow(recordId, "reply", { visibleOptions: 0 }, caseId);
+  scheduleInquiryRender(caseId, {
+    focusInquiryInput: true,
+    inquiryScrollAction: "turn-keep-latest",
+    turnId
+  });
+
+  if (!(await waitInquiryFlowStep(caseId, runToken, randBetween(560, 820)))) return "stopped";
+  if (shouldShowInquiryTeaching(replyRecord)) {
+    if (replyRecord?.unlockCueLabel && state.page === "inquiry" && state.activeCaseId === caseId) {
+      state.pendingUnlockCue = { label: replyRecord.unlockCueLabel };
+    }
+    updateInquiryRecordFlow(recordId, "teaching", { visibleOptions: 0 }, caseId);
+    scheduleInquiryRender(caseId, {
+      focusInquiryInput: true,
+      inquiryScrollAction: "turn-keep-latest",
+      turnId
+    });
+  }
+
+  if (replyRecord?.judgement && !replyRecord.judgement.choice) {
+    if (!(await waitInquiryFlowStep(caseId, runToken, randBetween(540, 820)))) return "stopped";
+    updateInquiryRecordFlow(recordId, "quiz", { visibleOptions: 0 }, caseId);
+    scheduleInquiryRender(caseId, {
+      focusInquiryInput: true,
+      preserveThreadScroll: true,
+      turnId
+    });
+
+    for (let index = 1; index <= replyRecord.judgement.options.length; index += 1) {
+      if (!(await waitInquiryFlowStep(caseId, runToken, index === 1 ? 120 : 100))) return "stopped";
+      updateInquiryRecordFlow(recordId, "quiz", { visibleOptions: index }, caseId);
+      scheduleInquiryRender(caseId, {
+        focusInquiryInput: true,
+        preserveThreadScroll: true,
+        turnId
+      });
+    }
+
+    updateInquiryRecordFlow(recordId, "wait-choice", { visibleOptions: replyRecord.judgement.options.length }, caseId);
+    scheduleInquiryRender(caseId, {
+      focusInquiryInput: true,
+      inquiryScrollAction: "turn-keep-latest",
+      turnId
+    });
+    return "wait-choice";
+  }
+
+  updateInquiryRecordFlow(recordId, "finished", {
+    visibleOptions: replyRecord?.judgement?.options?.length || 0
+  }, caseId);
+  scheduleInquiryRender(caseId, {
+    focusInquiryInput: true,
+    preserveThreadScroll: true,
+    turnId
+  });
+  return "finished";
+}
+
+function shouldShowInquiryTeaching(record) {
+  return Boolean(record?.unlockedFinding || record?.coachTip || record?.judgement);
+}
+
+function isInquiryFlowRunAlive(caseId, runToken) {
+  const flowState = getInquiryFlowState(caseId);
+  return flowState.runToken === runToken;
+}
+
+function waitInquiryFlowStep(caseId, runToken, delay) {
+  return new Promise(resolve => {
+    window.setTimeout(() => resolve(isInquiryFlowRunAlive(caseId, runToken)), delay);
+  });
+}
+
+function randBetween(min, max) {
+  return Math.round(min + Math.random() * (max - min));
+}
+
+function renderInquiryFlowStep(caseId = state.activeCaseId, options = {}) {
+  if (state.page !== "inquiry" || state.activeCaseId !== caseId) return;
+  const caseState = getCaseStateById(caseId);
+  const turnId = options.turnId || getInquiryFlowState(caseId).activeRecordId || caseState.inquiryViewport.currentTurnId;
+  if (turnId) {
+    caseState.inquiryViewport.currentTurnId = turnId;
+    if (options.inquiryScrollAction || !caseState.inquiryViewport.lockedTurnId) {
+      caseState.inquiryViewport.lockedTurnId = turnId;
+    }
+  }
+  render("inquiry", {
+    noPageMotion: true,
+    focusInquiryInput: options.focusInquiryInput,
+    preserveThreadScroll: !options.inquiryScrollAction,
+    inquiryScrollAction: options.inquiryScrollAction,
+    turnId,
+    scrollBehavior: options.scrollBehavior
+  });
+}
+
+function scheduleInquiryRender(caseId = state.activeCaseId, options = {}) {
+  if (state.page !== "inquiry" || state.activeCaseId !== caseId) return;
+  inquiryRenderScheduler.caseId = caseId;
+  inquiryRenderScheduler.options = {
+    ...options,
+    focusInquiryInput: Boolean(options.focusInquiryInput || inquiryRenderScheduler.options?.focusInquiryInput)
+  };
+  if (inquiryRenderScheduler.rafId) return;
+  inquiryRenderScheduler.rafId = requestAnimationFrame(() => {
+    const targetCaseId = inquiryRenderScheduler.caseId;
+    const renderOptions = inquiryRenderScheduler.options || {};
+    inquiryRenderScheduler.rafId = 0;
+    inquiryRenderScheduler.caseId = "";
+    inquiryRenderScheduler.options = null;
+    renderInquiryFlowStep(targetCaseId, renderOptions);
+  });
+}
+
+function resumePendingInquiryFlow(caseId = state.activeCaseId) {
+  const flowState = getInquiryFlowState(caseId);
+  if (flowState.running || !flowState.queue.length) return;
+  startInquiryFlowProcessor(caseId);
 }
 
 function unlockInfoByKey(key) {
@@ -3716,6 +4437,10 @@ function getColdAssessmentResult() {
 }
 
 function getColdFeedbackScenario() {
+  return DATA.coldFeedbackMap[getColdFeedbackScenarioKey()];
+}
+
+function getColdFeedbackScenarioKey() {
   const selections = getColdStudentSelections();
   const answer = DATA.coldAnswer;
   const coldHerbWrong = selections.herbs.filter(item => answer.coldHerbs.includes(item)).length;
@@ -3726,16 +4451,16 @@ function getColdFeedbackScenario() {
   const exactMainGroups = mainGroups.every(group => selectedGroups.includes(group)) && !hasWindHeatGroup && !hasDampYinGroup;
   const mainGroupCount = selectedGroups.filter(group => mainGroups.includes(group)).length;
   if (selections.syndrome === "风寒感冒" && selections.formula === "荆防败毒散加减") {
-    if (exactMainGroups) return DATA.coldFeedbackMap.correct;
-    if (hasWindHeatGroup || coldHerbWrong >= 2) return DATA.coldFeedbackMap.coldHerbs;
-    if (hasDampYinGroup || mainGroupCount < 3) return DATA.coldFeedbackMap.groupMismatch;
+    if (exactMainGroups) return "correct";
+    if (hasWindHeatGroup || coldHerbWrong >= 2) return "coldHerbs";
+    if (hasDampYinGroup || mainGroupCount < 3) return "groupMismatch";
   }
-  if (selections.formula === "麻黄汤加减") return DATA.coldFeedbackMap.mahuang;
-  if (selections.formula === "桂枝汤加减") return DATA.coldFeedbackMap.guizhi;
-  if (selections.syndrome === "风热感冒" || ["银翘散加减", "桑菊饮加减"].includes(selections.formula) || selections.patent.includes("银翘解毒丸")) return DATA.coldFeedbackMap.windHeat;
-  if (selections.syndrome === "暑湿感冒" || ["新加香薷饮加减", "藿香正气散加减"].includes(selections.formula) || selections.patent.includes("藿香正气水")) return DATA.coldFeedbackMap.dampSummer;
-  if (selections.formula === "白虎加人参汤") return DATA.coldFeedbackMap.windHeat;
-  return DATA.coldFeedbackMap.windHeat;
+  if (selections.formula === "麻黄汤加减") return "mahuang";
+  if (selections.formula === "桂枝汤加减") return "guizhi";
+  if (selections.syndrome === "风热感冒" || ["银翘散加减", "桑菊饮加减"].includes(selections.formula) || selections.patent.includes("银翘解毒丸")) return "windHeat";
+  if (selections.syndrome === "暑湿感冒" || ["新加香薷饮加减", "藿香正气散加减"].includes(selections.formula) || selections.patent.includes("藿香正气水")) return "dampSummer";
+  if (selections.formula === "白虎加人参汤") return "windHeat";
+  return "windHeat";
 }
 
 function getColdObservationPreview() {
@@ -3745,6 +4470,101 @@ function getColdObservationPreview() {
   if (selections.syndrome === "风热感冒" || ["银翘散加减", "桑菊饮加减", "白虎加人参汤"].includes(selections.formula)) return "风险观察：风热或热盛方向可能无法改善怕冷、清涕和身痛。";
   if (selections.syndrome === "暑湿感冒" || ["新加香薷饮加减", "藿香正气散加减"].includes(selections.formula)) return "风险观察：若胃肠症状不突出，化湿方向可能无法切中主证。";
   return "预计观察重点：怕冷、鼻涕、头痛身痛、咳痰变化。";
+}
+
+function getColdObservationNextFocus(scenarioKey, dayIndex) {
+  const focusMap = {
+    correct: [
+      "继续观察汗出、咳嗽、痰色和鼻涕性质是否继续改善。",
+      "继续观察鼻塞是否基本缓解，低热是否退去，睡眠和精神是否恢复。",
+      "本案模拟恢复较好，说明辨证、治法和方药方向整体匹配。"
+    ],
+    mahuang: [
+      "继续观察发散后怕冷、鼻塞和体力是否同步改善，判断药力是否过峻。",
+      "继续观察清涕、咳嗽与精神恢复是否跟上，区分“相关”与“最合适”之间的差别。",
+      "复盘时重点比较：同属风寒网络时，为什么荆防败毒散比麻黄汤更贴合本案。"
+    ],
+    guizhi: [
+      "继续观察有无汗出变化，以及恶寒、鼻涕和身痛是否同步改善。",
+      "继续观察无汗和恶寒是否仍是主线，判断营卫不和路径是否站得住。",
+      "复盘时重点比较：为什么“无汗”会让桂枝汤路径站不稳。"
+    ],
+    windHeat: [
+      "继续观察怕冷、清涕、身痛是否仍无明显改善，验证清热方向是否偏离。",
+      "继续观察清涕是否仍在、畏寒是否残留，重新回看风寒与风热证据差别。",
+      "复盘时重点看：哪些证据支持风寒？为什么不是风热？"
+    ],
+    dampSummer: [
+      "继续观察胃肠症状是否仍不突出，以及怕冷、清涕、身痛能否真正改善。",
+      "继续观察身热不扬、胸闷泛恶、腹胀等暑湿证据是否始终缺位。",
+      "复盘时重点看：为什么本案不能只因为有点低热就走向暑湿路径。"
+    ],
+    coldHerbs: [
+      "继续观察怕冷、清涕和胃口变化，判断寒凉药是否拖住了主线。",
+      "继续观察恢复节奏是否仍偏慢，验证药味寒热方向有没有影响整体匹配。",
+      "复盘时重点看：为什么热象不明显时，不宜把清热药放成主线。"
+    ],
+    groupMismatch: [
+      "继续观察咳嗽、鼻塞和怕冷改善是否仍不稳定，判断药组配合是否完整。",
+      "继续观察恢复节奏是否顺畅，验证主攻、配合、辅助三组有没有真正协同。",
+      "复盘时重点看：主攻、配合、辅助三组各自负责什么，为什么少一组会影响恢复节奏。"
+    ]
+  };
+  return focusMap[scenarioKey]?.[dayIndex] || "继续观察症状组合和变化趋势，不要只盯住单个症状。";
+}
+
+function getColdObservationSummary(scenarioKey) {
+  const summaryMap = {
+    correct: "本案服药后怕冷、清涕、鼻塞、头痛身痛逐步缓解，说明辛温解表、宣肺散寒方向与当前病机基本匹配。下一步进入复盘，重点看：哪些证据支持风寒？为什么不是风热？为什么选择荆防败毒散？",
+    mahuang: "本案虽然沿风寒网络出现一定改善，但恢复节奏和症状对应并不算最顺。下一步进入复盘，重点看：为什么同属风寒路径时，荆防败毒散比麻黄汤更适合本案教学主线。",
+    guizhi: "本案部分症状有所缓和，但“无汗、恶寒明显”与桂枝汤主线并不契合。下一步进入复盘，重点看：为什么有汗 / 无汗会影响风寒方剂的细分判断。",
+    windHeat: "本案观察显示辛凉清解没有切中当前病机。下一步进入复盘，重点看：哪些证据一直在提示风寒，而不是风热。",
+    dampSummer: "本案观察显示暑湿方向没有抓住核心矛盾。下一步进入复盘，重点看：为什么胃肠症状不突出时，不能把暑湿放成主线。",
+    coldHerbs: "本案观察提示药味寒热方向放得偏了，会拖慢主线恢复。下一步进入复盘，重点看：热象不明显时，为什么不宜把清热药放在主力位置。",
+    groupMismatch: "本案观察提示主线方向大体在，但药组协同还不够完整。下一步进入复盘，重点看：主攻、配合、辅助三组如何共同支撑方义。"
+  };
+  return summaryMap[scenarioKey] || summaryMap.windHeat;
+}
+
+function getColdObservationStatusMeta(scenarioKey) {
+  const metaMap = {
+    correct: {
+      badge: "较初诊好转",
+      summary: "较初诊好转：怕冷减轻，清涕减少，头痛身痛缓解。",
+      note: "仍有轻微鼻塞，因此表情还未完全恢复。"
+    },
+    mahuang: {
+      badge: "方向相关",
+      summary: "较初诊有变化：怕冷和身痛略缓，但鼻塞清涕改善还不够顺。",
+      note: "说明路径并非完全偏离，但和本案最贴合的恢复节奏还有差距。"
+    },
+    guizhi: {
+      badge: "改善有限",
+      summary: "变化不够理想：怕冷和鼻涕仍较明显，恢复节奏偏慢。",
+      note: "顶层状态提示的是整体趋势，不代表每个症状都没有变化。"
+    },
+    windHeat: {
+      badge: "改善有限",
+      summary: "较初诊改善有限：咽部略舒，但怕冷、清涕和身痛仍未顺畅缓解。",
+      note: "这类状态常提示方药方向没有真正切中当前病机。"
+    },
+    dampSummer: {
+      badge: "主线偏离",
+      summary: "整体恢复不顺：胃口略有变化，但怕冷、清涕和身痛改善有限。",
+      note: "说明这次更像抓到了旁支，而没有抓住主线。"
+    },
+    coldHerbs: {
+      badge: "方向受阻",
+      summary: "恢复节奏偏慢：咽部略缓，但怕冷、清涕和身痛改善受限。",
+      note: "药味寒热方向放得过偏时，整体恢复会显得别扭。"
+    },
+    groupMismatch: {
+      badge: "恢复不稳",
+      summary: "较初诊有变化，但鼻塞、清涕和咳嗽改善还不够稳定。",
+      note: "这常见于主线大体抓到，但药组协同还不够完整的时候。"
+    }
+  };
+  return metaMap[scenarioKey] || metaMap.correct;
 }
 
 function getAssessmentResult() {

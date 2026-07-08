@@ -310,6 +310,10 @@ h3 {
   font-size: 18px;
 }
 
+.section-head.compact {
+  margin-bottom: 14px;
+}
+
 .patient-layer-head {
   align-items: flex-start;
   margin-bottom: 16px;
@@ -882,6 +886,7 @@ h3 {
 }
 
 .inquiry-page {
+  position: relative;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   height: 100vh;
@@ -940,6 +945,11 @@ h3 {
   gap: 10px;
 }
 
+.evidence-status-block {
+  display: grid;
+  gap: 8px;
+}
+
 .evidence-status-item {
   display: grid;
   gap: 10px;
@@ -971,6 +981,11 @@ h3 {
   border-color: rgba(190, 145, 74, 0.42);
   background: linear-gradient(135deg, rgba(255, 247, 230, 0.98), rgba(255, 252, 244, 0.98));
   box-shadow: 0 10px 22px rgba(179, 134, 67, 0.12);
+}
+
+.evidence-status-block.active .evidence-status-item.unlocked.active {
+  border-color: rgba(88, 125, 93, 0.34);
+  background: linear-gradient(135deg, #edf6e8, #fff9ef);
 }
 
 .evidence-status-head {
@@ -1029,8 +1044,37 @@ h3 {
   animation: reveal 220ms ease both;
 }
 
+.evidence-guide-panel.inline {
+  margin-top: 0;
+  padding: 14px 14px 15px;
+}
+
+.evidence-guide-panel.inline.unlocked {
+  border-color: rgba(88, 125, 93, 0.2);
+  background: linear-gradient(135deg, rgba(236, 246, 232, 0.96), rgba(255, 250, 240, 0.98));
+  box-shadow: 0 10px 24px rgba(70, 96, 77, 0.08);
+}
+
 .evidence-guide-head {
   align-items: flex-start;
+}
+
+.evidence-guide-inline-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.evidence-guide-inline-label {
+  margin: 10px 0 0;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.evidence-guide-intro {
+  margin: 6px 0 0;
 }
 
 .evidence-guide-head h3 {
@@ -1109,7 +1153,7 @@ h3 {
   min-height: 0;
   gap: 12px;
   overflow-y: auto;
-  padding: 2px 0 14px;
+  padding: 2px 0 120px;
   -webkit-overflow-scrolling: touch;
   scrollbar-gutter: stable;
 }
@@ -1230,6 +1274,24 @@ h3 {
   backdrop-filter: blur(16px);
 }
 
+.jump-latest-btn {
+  position: absolute;
+  right: 18px;
+  bottom: calc(76px + env(safe-area-inset-bottom));
+  z-index: 9;
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(86, 66, 36, 0.14);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.jump-latest-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+}
+
 .inquiry-input {
   min-width: 0;
   min-height: 44px;
@@ -1272,21 +1334,19 @@ h3 {
   gap: 8px;
 }
 
-.evidence-chip-row {
-  display: flex;
-  justify-content: flex-start;
+.message-enter {
+  animation: messageFadeUp 320ms ease-out both;
 }
 
-.evidence-chip {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  padding: 0 10px;
-  border-radius: 999px;
-  background: rgba(201, 154, 72, 0.16);
-  color: #7a5827;
-  font-size: 12px;
-  font-weight: 900;
+@keyframes messageFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .evidence-judge-card {
@@ -1325,6 +1385,11 @@ h3 {
   min-width: 22px;
 }
 
+.judge-option-btn.option-enter {
+  opacity: 0;
+  animation: messageFadeUp 280ms ease-out forwards;
+}
+
 .coach-tip {
   padding: 10px 12px;
   border-left: 3px solid var(--gold);
@@ -1341,6 +1406,34 @@ h3 {
   margin-bottom: 4px;
   color: #7a5827;
   font-size: 12px;
+}
+
+.ai-teaching-card {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid rgba(201, 154, 72, 0.22);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255, 248, 234, 0.98), rgba(255, 252, 245, 0.96));
+  box-shadow: 0 10px 20px rgba(112, 85, 43, 0.06);
+}
+
+.ai-teaching-card .badge {
+  margin-bottom: 2px;
+}
+
+.ai-teaching-copy {
+  margin: 0;
+  color: #5f4c37;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+.ai-teaching-evidence {
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .coach-tip.standalone {
@@ -1386,6 +1479,61 @@ h3 {
   font-size: 11px;
   font-style: normal;
   font-weight: 800;
+}
+
+.typing-bubble {
+  max-width: 220px;
+}
+
+.typing-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+}
+
+.typing-line em {
+  margin-top: 0;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #6c7d74;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.typing-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.typing-dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(29, 76, 62, 0.56);
+  animation: typingBounce 900ms ease-in-out infinite;
+}
+
+.typing-dots i:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.typing-dots i:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+@keyframes typingBounce {
+  0%, 80%, 100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
 }
 
 .chat-empty {
@@ -1755,6 +1903,16 @@ h3 {
   box-shadow: inset 0 0 0 1px rgba(29, 76, 62, 0.1);
 }
 
+.group-judge-card.review {
+  cursor: default;
+}
+
+.group-judge-card.review.dimmed {
+  border-color: rgba(116, 104, 79, 0.12);
+  background: #fffaf2;
+  box-shadow: 0 8px 20px rgba(112, 85, 43, 0.05);
+}
+
 .group-judge-head {
   display: flex;
   align-items: center;
@@ -1771,6 +1929,14 @@ h3 {
   color: #8b7152;
   font-size: 12px;
   font-weight: 900;
+}
+
+.group-judge-card.review.selected .group-judge-head span {
+  color: #2f694c;
+}
+
+.group-judge-card.review.dimmed .group-judge-head span {
+  color: #8b7152;
 }
 
 .group-judge-card p,
@@ -2004,6 +2170,26 @@ h3 {
   line-height: 1.65;
 }
 
+.observation-day-card {
+  display: grid;
+  gap: 14px;
+}
+
+.observation-slice h4 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.observation-basis .summary-list,
+.observation-basis {
+  margin-top: 12px;
+}
+
+.teacher-comment-card {
+  margin-top: 14px;
+}
+
 .system-tip {
   padding: 12px;
   border-radius: 14px;
@@ -2020,6 +2206,11 @@ h3 {
 .risk-card .system-tip,
 .simulation-card {
   margin-top: 12px;
+}
+
+.simulation-card > .badge:first-child,
+.simulation-card > .tiny-pill:first-child {
+  margin-bottom: 12px;
 }
 
 .consult-opinion {
