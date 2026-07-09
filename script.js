@@ -1295,6 +1295,11 @@ const inquiryRenderScheduler = {
   caseId: "",
   options: null
 };
+const INQUIRY_SCROLL_ACTION_PRIORITY = {
+  "": 0,
+  "turn-keep-latest": 1,
+  "turn-start": 2
+};
 const INQUIRY_FLOW_STAGE_ORDER = {
   waiting: 0,
   typing: 1,
@@ -1347,8 +1352,11 @@ function captureInquiryThreadState() {
   const caseState = getCaseState();
   const viewport = caseState.inquiryViewport;
   const flowState = caseState.inquiryFlow;
+  if (Date.now() < (viewport.programmaticScrollingUntil || 0)) {
+    return;
+  }
   viewport.lastScrollTop = thread.scrollTop;
-  if (flowState.running || Date.now() < (viewport.programmaticScrollingUntil || 0)) {
+  if (flowState.running) {
     return;
   }
   const distanceFromBottom = thread.scrollHeight - thread.clientHeight - thread.scrollTop;
@@ -1374,6 +1382,9 @@ function applyInquiryThreadRenderState(options = {}) {
   }
   if (options.preserveThreadScroll || options.preserveScroll) {
     thread.scrollTop = viewport.lastScrollTop || 0;
+    if (viewport.lockedTurnId && flowState.running) {
+      ensureInquiryTurnVisible(options.turnId || viewport.lockedTurnId, "auto");
+    }
     return;
   }
   if (viewport.lockedTurnId && flowState.running) {
@@ -3870,11 +3881,11 @@ function bindInquiryThreadScroll(thread = document.querySelector("#inquiryThread
     const viewport = caseState.inquiryViewport;
     const flowState = caseState.inquiryFlow;
     const now = Date.now();
-    const previousTop = viewport.lastScrollTop || 0;
-    viewport.lastScrollTop = thread.scrollTop;
+    const previousTop = viewport.lastScrollTop || thread.scrollTop;
     if (now < (viewport.programmaticScrollingUntil || 0)) {
       return;
     }
+    viewport.lastScrollTop = thread.scrollTop;
     const movedUp = thread.scrollTop < previousTop - 12;
     const distanceFromBottom = thread.scrollHeight - thread.clientHeight - thread.scrollTop;
     if (flowState.running) {
@@ -3930,7 +3941,7 @@ function scrollInquiryToTurnStart(turnId, behavior = "smooth") {
   const metrics = getInquiryViewportMetrics();
   if (!pair || !metrics.thread) return;
   const targetTop = Math.max(0, pair.offsetTop - metrics.thread.clientHeight * metrics.anchorRatio);
-  markInquiryProgrammaticScroll(behavior === "smooth" ? 420 : 220);
+  markInquiryProgrammaticScroll(behavior === "smooth" ? 760 : 260);
   metrics.thread.scrollTo({ top: targetTop, behavior });
   const viewport = getCaseState().inquiryViewport;
   viewport.currentTurnId = turnId;
@@ -3965,7 +3976,7 @@ function ensureInquiryTurnVisible(turnId, behavior = "auto") {
   const maxTargetTop = Math.max(currentTop, pairTop - metrics.thread.clientHeight * 0.2);
   const targetTop = Math.min(currentTop + overflow + 12, maxTargetTop);
   if (targetTop <= currentTop) return;
-  markInquiryProgrammaticScroll(behavior === "smooth" ? 420 : 240);
+  markInquiryProgrammaticScroll(behavior === "smooth" ? 520 : 300);
   metrics.thread.scrollTo({ top: targetTop, behavior });
   viewport.lastScrollTop = targetTop;
 }
@@ -4008,7 +4019,6 @@ function hasAskedQuestion(question, key = "") {
 
 function addInquiryRecord(question, result, source) {
   const caseState = getCaseState();
-  const unlockedInfo = unlockInfoByKey(result.key);
   const record = {
     id: `record-${state.activeCaseId}-${caseState.nextRecordId++}`,
     turnId: "",
@@ -4018,11 +4028,12 @@ function addInquiryRecord(question, result, source) {
     relevance: result.relevance,
     source,
     speaker: result.speaker || "patient",
-    unlockedInfo: unlockedInfo.category || "",
-    unlockedFinding: unlockedInfo.isNew ? unlockedInfo.finding : "",
-    unlockCueLabel: unlockedInfo.label || "",
-    judgement: unlockedInfo.isNew && unlockedInfo.judge ? JSON.parse(JSON.stringify(unlockedInfo.judge)) : null,
-    coachTip: unlockedInfo.isNew && unlockedInfo.judge ? "" : getInquiryCoachTip(result),
+    unlockedInfo: "",
+    unlockedFinding: "",
+    unlockCueLabel: "",
+    judgement: null,
+    coachTip: "",
+    evidenceUnlocked: false,
     messageFlow: {
       status: "waiting",
       visibleOptions: 0
@@ -4073,7 +4084,7 @@ function queueInquiryQuestion(question, source = "free", preferredKey = "") {
   viewport.autoFollow = true;
   viewport.showReturnLatest = false;
   flowState.queue.push(record.id);
-  scheduleInquiryRender(state.activeCaseId, {
+  renderInquiryFlowStep(state.activeCaseId, {
     focusInquiryInput: true,
     inquiryScrollAction: "turn-start",
     turnId: record.turnId,
@@ -4122,9 +4133,10 @@ async function playInquiryRecordFlow(caseId, recordId, runToken) {
   });
 
   if (!(await waitInquiryFlowStep(caseId, runToken, randBetween(560, 820)))) return "stopped";
-  if (shouldShowInquiryTeaching(replyRecord)) {
-    if (replyRecord?.unlockCueLabel && state.page === "inquiry" && state.activeCaseId === caseId) {
-      state.pendingUnlockCue = { label: replyRecord.unlockCueLabel };
+  const teachingRecord = unlockEvidenceForRecord(recordId, caseId);
+  if (shouldShowInquiryTeaching(teachingRecord)) {
+    if (teachingRecord?.unlockCueLabel && state.page === "inquiry" && state.activeCaseId === caseId) {
+      state.pendingUnlockCue = { label: teachingRecord.unlockCueLabel };
     }
     updateInquiryRecordFlow(recordId, "teaching", { visibleOptions: 0 }, caseId);
     scheduleInquiryRender(caseId, {
@@ -4134,7 +4146,7 @@ async function playInquiryRecordFlow(caseId, recordId, runToken) {
     });
   }
 
-  if (replyRecord?.judgement && !replyRecord.judgement.choice) {
+  if (teachingRecord?.judgement && !teachingRecord.judgement.choice) {
     if (!(await waitInquiryFlowStep(caseId, runToken, randBetween(540, 820)))) return "stopped";
     updateInquiryRecordFlow(recordId, "quiz", { visibleOptions: 0 }, caseId);
     scheduleInquiryRender(caseId, {
@@ -4143,7 +4155,7 @@ async function playInquiryRecordFlow(caseId, recordId, runToken) {
       turnId
     });
 
-    for (let index = 1; index <= replyRecord.judgement.options.length; index += 1) {
+    for (let index = 1; index <= teachingRecord.judgement.options.length; index += 1) {
       if (!(await waitInquiryFlowStep(caseId, runToken, index === 1 ? 120 : 100))) return "stopped";
       updateInquiryRecordFlow(recordId, "quiz", { visibleOptions: index }, caseId);
       scheduleInquiryRender(caseId, {
@@ -4153,7 +4165,7 @@ async function playInquiryRecordFlow(caseId, recordId, runToken) {
       });
     }
 
-    updateInquiryRecordFlow(recordId, "wait-choice", { visibleOptions: replyRecord.judgement.options.length }, caseId);
+    updateInquiryRecordFlow(recordId, "wait-choice", { visibleOptions: teachingRecord.judgement.options.length }, caseId);
     scheduleInquiryRender(caseId, {
       focusInquiryInput: true,
       inquiryScrollAction: "turn-keep-latest",
@@ -4163,7 +4175,7 @@ async function playInquiryRecordFlow(caseId, recordId, runToken) {
   }
 
   updateInquiryRecordFlow(recordId, "finished", {
-    visibleOptions: replyRecord?.judgement?.options?.length || 0
+    visibleOptions: teachingRecord?.judgement?.options?.length || 0
   }, caseId);
   scheduleInquiryRender(caseId, {
     focusInquiryInput: true,
@@ -4215,10 +4227,7 @@ function renderInquiryFlowStep(caseId = state.activeCaseId, options = {}) {
 function scheduleInquiryRender(caseId = state.activeCaseId, options = {}) {
   if (state.page !== "inquiry" || state.activeCaseId !== caseId) return;
   inquiryRenderScheduler.caseId = caseId;
-  inquiryRenderScheduler.options = {
-    ...options,
-    focusInquiryInput: Boolean(options.focusInquiryInput || inquiryRenderScheduler.options?.focusInquiryInput)
-  };
+  inquiryRenderScheduler.options = mergeInquiryRenderOptions(inquiryRenderScheduler.options, options);
   if (inquiryRenderScheduler.rafId) return;
   inquiryRenderScheduler.rafId = requestAnimationFrame(() => {
     const targetCaseId = inquiryRenderScheduler.caseId;
@@ -4230,16 +4239,50 @@ function scheduleInquiryRender(caseId = state.activeCaseId, options = {}) {
   });
 }
 
+function mergeInquiryRenderOptions(previousOptions = null, nextOptions = {}) {
+  if (!previousOptions) {
+    return { ...nextOptions };
+  }
+  const previousAction = previousOptions.inquiryScrollAction || "";
+  const nextAction = nextOptions.inquiryScrollAction || "";
+  const previousPriority = INQUIRY_SCROLL_ACTION_PRIORITY[previousAction] || 0;
+  const nextPriority = INQUIRY_SCROLL_ACTION_PRIORITY[nextAction] || 0;
+  const keepPreviousAction = previousPriority > nextPriority || (previousPriority > 0 && nextPriority === 0);
+  const merged = {
+    ...previousOptions,
+    ...nextOptions,
+    focusInquiryInput: Boolean(previousOptions.focusInquiryInput || nextOptions.focusInquiryInput)
+  };
+
+  if (keepPreviousAction) {
+    merged.inquiryScrollAction = previousOptions.inquiryScrollAction;
+    merged.turnId = previousOptions.turnId || nextOptions.turnId;
+    merged.scrollBehavior = previousOptions.scrollBehavior || nextOptions.scrollBehavior;
+    return merged;
+  }
+
+  if (nextPriority > 0) {
+    merged.inquiryScrollAction = nextOptions.inquiryScrollAction;
+    merged.turnId = nextOptions.turnId || previousOptions.turnId;
+    merged.scrollBehavior = nextOptions.scrollBehavior || previousOptions.scrollBehavior;
+    return merged;
+  }
+
+  merged.turnId = nextOptions.turnId || previousOptions.turnId;
+  merged.scrollBehavior = nextOptions.scrollBehavior || previousOptions.scrollBehavior;
+  return merged;
+}
+
 function resumePendingInquiryFlow(caseId = state.activeCaseId) {
   const flowState = getInquiryFlowState(caseId);
   if (flowState.running || !flowState.queue.length) return;
   startInquiryFlowProcessor(caseId);
 }
 
-function unlockInfoByKey(key) {
+function unlockInfoByKey(key, caseId = state.activeCaseId) {
   const meta = getEvidenceMetaByKey(key);
   if (!meta) return { isNew: false, label: "" };
-  const caseState = getCaseState();
+  const caseState = getCaseStateById(caseId);
   const existing = caseState.unlockedEvidence?.[meta.category];
   if (existing) {
     return { ...meta, isNew: false, label: meta.finding || meta.category };
@@ -4247,6 +4290,23 @@ function unlockInfoByKey(key) {
   caseState.unlockedEvidence[meta.category] = meta.finding;
   if (!caseState.unlockedInfo.includes(meta.category)) caseState.unlockedInfo.push(meta.category);
   return { ...meta, isNew: true, label: meta.finding || meta.category };
+}
+
+function unlockEvidenceForRecord(recordId, caseId = state.activeCaseId) {
+  const record = getInquiryRecordById(recordId, caseId);
+  if (!record || record.evidenceUnlocked) return record;
+  const unlockedInfo = unlockInfoByKey(record.matchedKey, caseId);
+  record.unlockedInfo = unlockedInfo.category || "";
+  record.unlockedFinding = unlockedInfo.isNew ? unlockedInfo.finding : "";
+  record.unlockCueLabel = unlockedInfo.isNew ? (unlockedInfo.label || "") : "";
+  record.judgement = unlockedInfo.isNew && unlockedInfo.judge
+    ? JSON.parse(JSON.stringify(unlockedInfo.judge))
+    : null;
+  record.coachTip = unlockedInfo.isNew && unlockedInfo.judge
+    ? ""
+    : getInquiryCoachTip(record);
+  record.evidenceUnlocked = true;
+  return record;
 }
 
 function getInquiryCoachTip(result) {
